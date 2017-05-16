@@ -1,0 +1,12 @@
+.map{
+    height:300px;
+    width:100%
+}
+.btn-run{
+    position:relative;
+    top:-5px;
+}
+.btn-stop{
+    position:relative;
+    top:-5px;
+}

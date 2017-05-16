@@ -1,0 +1,13 @@
+{% extends "grace/base.html" %}
+{% load tethys_gizmos %}
+
+{% block app_content %}
+  {% if not reg_id %}
+    <h1>Welcome</h1>
+    <p>This app illustrates how to perform basic Tethys functions using GRACE groundwater data of groundwater volume changes over time since 2002.</p>
+    <p>Click on a region using the links on the left to plot GRACE data for a selected region.</p>
+  {% else %}
+    {% gizmo map_view map_options %}
+    {% gizmo plot_view grace_plot %}
+  {% endif %}
+{% endblock %}
