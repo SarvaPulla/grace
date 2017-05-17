@@ -85,11 +85,17 @@
         <div class="btn btn-danger btn-group btn-xs btn-stop" role="group"><span class="glyphicon glyphicon-pause"></span></div>
         <div class="btn btn-danger btn-group btn-xs btn-decrease" role="group"><span class="glyphicon glyphicon-fast-backward"></span></div>
         <div class="btn btn-success btn-group btn-xs btn-increase" role="group"><span class="glyphicon glyphicon-fast-forward"></span></div>
+
     </div>
     <div id="slider" class="col-md-10"></div>
 </div>
-<label id="label" for="grace-date">Day:</label>
-<input type="text" id="grace-date" readonly style="border:0; color:#f6931f; font-weight:normal;" value="2002 April 16">
+<div class="row">
+    <div class="col-md-5">     <label id="speed-label" for="speed">Animation Speed(s):</label>
+        <input type="text" id="speed" readonly style="border:0; color:#f6931f; font-weight:normal;" value="1"></div>
+        <div class="col-md-3"><label id="label" for="grace-date">Day:</label>
+        <input type="text" id="grace-date" readonly style="border:0; color:#f6931f; font-weight:normal;" value="2002 April 16"></div>
+</div>
+
 
 <br>
 <div id="map" class="map"></div>

@@ -582,6 +582,7 @@ var LIBRARY_OBJECT = (function() {
         if(animationDelay > 250){
 
             animationDelay = animationDelay - 250;
+            $("#speed").val(animationDelay/1000);
             animate();
         }
 
@@ -591,6 +592,7 @@ var LIBRARY_OBJECT = (function() {
     $(".btn-decrease").on("click", function() {
         clearInterval(sliderInterval);
         animationDelay = animationDelay + 250;
+        $("#speed").val(animationDelay/1000);
         animate();
     });
 

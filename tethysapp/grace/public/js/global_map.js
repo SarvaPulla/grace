@@ -568,6 +568,7 @@ var LIBRARY_OBJECT = (function() {
         if(animationDelay > 250){
 
             animationDelay = animationDelay - 250;
+            $("#speed").val(animationDelay/1000);
             animate();
         }
 
@@ -577,6 +578,7 @@ var LIBRARY_OBJECT = (function() {
     $(".btn-decrease").on("click", function() {
         clearInterval(sliderInterval);
         animationDelay = animationDelay + 250;
+        $("#speed").val(animationDelay/1000);
         animate();
     });
     /************************************************************************
@@ -600,6 +602,8 @@ var LIBRARY_OBJECT = (function() {
         init_vars();
         init_slider();
         gen_color_bar();
+        $("#speed").val(animationDelay/1000);
+
         $("#select_layer").change(function(){
             add_wms();
             var selected_option = $(this).find('option:selected').index();

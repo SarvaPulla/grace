@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da222448-5a55-4b18-9327-c69cd4160fc3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/ajax_controllers.py" afterPath="$PROJECT_DIR$/tethysapp/grace/ajax_controllers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/controllers.py" afterPath="$PROJECT_DIR$/tethysapp/grace/controllers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/public/css/main.css" afterPath="$PROJECT_DIR$/tethysapp/grace/public/css/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/public/js/global_map.js" afterPath="$PROJECT_DIR$/tethysapp/grace/public/js/global_map.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/public/js/nepal_graph.js" afterPath="$PROJECT_DIR$/tethysapp/grace/public/js/nepal_graph.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/templates/grace/global_map.html" afterPath="$PROJECT_DIR$/tethysapp/grace/templates/grace/global_map.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/templates/grace/nepal_graph.html" afterPath="$PROJECT_DIR$/tethysapp/grace/templates/grace/nepal_graph.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/utilities.py" afterPath="$PROJECT_DIR$/tethysapp/grace/utilities.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -56,7 +51,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utilities.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="utilities.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tethysapp/grace/utilities.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1116">
@@ -71,10 +66,12 @@
       <file leaf-file-name="nepal_graph.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/nepal_graph.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="86" column="140" lean-forward="false" selection-start-line="86" selection-start-column="140" selection-end-line="86" selection-end-column="140" />
+            <state relative-caret-position="288">
+              <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="96" selection-end-column="6" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#5;n#div#5;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#1;n#div#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#5;n#div#6;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -84,8 +81,11 @@
         <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/global_map.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="212">
-              <caret line="91" column="8" lean-forward="false" selection-start-line="91" selection-start-column="8" selection-end-line="94" selection-end-column="140" />
-              <folding />
+              <caret line="103" column="6" lean-forward="false" selection-start-line="103" selection-start-column="6" selection-end-line="103" selection-end-column="6" />
+              <folding>
+                <element signature="n#style#0;n#input#0;n#div#0;n#div#2;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#1;n#div#2;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -113,51 +113,51 @@
       <file leaf-file-name="nepal_graph.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/nepal_graph.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="617" column="0" lean-forward="true" selection-start-line="617" selection-start-column="0" selection-end-line="617" selection-end-column="0" />
+            <state relative-caret-position="279">
+              <caret line="594" column="8" lean-forward="false" selection-start-line="594" selection-start-column="8" selection-end-line="594" selection-end-column="45" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <marker date="1495055163464" expanded="true" signature="13490:13911" ph="..." />
-                <marker date="1495055163464" expanded="true" signature="13747:13757" ph="..." />
-                <marker date="1495055163464" expanded="true" signature="13747:13786" ph="..." />
-                <marker date="1495055163464" expanded="true" signature="13747:13803" ph="..." />
-                <marker date="1495055163464" expanded="true" signature="13747:13832" ph="..." />
-                <marker date="1495055163464" expanded="true" signature="13747:13854" ph="..." />
-                <marker date="1495055163464" expanded="true" signature="13747:13877" ph="..." />
-                <marker date="1495055163464" expanded="true" signature="13747:13911" ph="..." />
-                <marker date="1495055163464" expanded="true" signature="14485:14907" ph="..." />
-                <marker date="1495055163464" expanded="true" signature="14497:14873" ph="..." />
-                <marker date="1495055163464" expanded="true" signature="14535:14850" ph="..." />
-                <marker date="1495055163464" expanded="true" signature="14553:14828" ph="..." />
-                <marker date="1495055163464" expanded="true" signature="14559:14799" ph="..." />
-                <marker date="1495055163464" expanded="true" signature="14587:14782" ph="..." />
-                <marker date="1495055163464" expanded="true" signature="14608:14753" ph="..." />
+                <marker date="1495057540427" expanded="true" signature="13490:13911" ph="..." />
+                <marker date="1495057540427" expanded="true" signature="13747:13757" ph="..." />
+                <marker date="1495057540427" expanded="true" signature="13747:13786" ph="..." />
+                <marker date="1495057540427" expanded="true" signature="13747:13803" ph="..." />
+                <marker date="1495057540427" expanded="true" signature="13747:13832" ph="..." />
+                <marker date="1495057540427" expanded="true" signature="13747:13854" ph="..." />
+                <marker date="1495057540427" expanded="true" signature="13747:13877" ph="..." />
+                <marker date="1495057540427" expanded="true" signature="13747:13911" ph="..." />
+                <marker date="1495057540427" expanded="true" signature="14485:14907" ph="..." />
+                <marker date="1495057540427" expanded="true" signature="14497:14873" ph="..." />
+                <marker date="1495057540427" expanded="true" signature="14535:14850" ph="..." />
+                <marker date="1495057540427" expanded="true" signature="14553:14828" ph="..." />
+                <marker date="1495057540427" expanded="true" signature="14559:14799" ph="..." />
+                <marker date="1495057540427" expanded="true" signature="14587:14782" ph="..." />
+                <marker date="1495057540427" expanded="true" signature="14608:14753" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="global_map.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="global_map.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/global_map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1197">
-              <caret line="559" column="43" lean-forward="true" selection-start-line="559" selection-start-column="43" selection-end-line="559" selection-end-column="43" />
+            <state relative-caret-position="495">
+              <caret line="580" column="45" lean-forward="false" selection-start-line="580" selection-start-column="45" selection-end-line="580" selection-end-column="45" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <marker date="1495054323926" expanded="true" signature="13091:13512" ph="..." />
-                <marker date="1495054323926" expanded="true" signature="13103:13478" ph="..." />
-                <marker date="1495054323926" expanded="true" signature="13141:13455" ph="..." />
-                <marker date="1495054323926" expanded="true" signature="13159:13433" ph="..." />
-                <marker date="1495054323926" expanded="true" signature="13165:13404" ph="..." />
-                <marker date="1495054323926" expanded="true" signature="13193:13387" ph="..." />
-                <marker date="1495054323926" expanded="true" signature="13214:13358" ph="..." />
-                <marker date="1495054323926" expanded="true" signature="14130:14552" ph="..." />
-                <marker date="1495054323926" expanded="true" signature="14142:14518" ph="..." />
-                <marker date="1495054323926" expanded="true" signature="14180:14495" ph="..." />
-                <marker date="1495054323926" expanded="true" signature="14198:14473" ph="..." />
-                <marker date="1495054323926" expanded="true" signature="14204:14444" ph="..." />
-                <marker date="1495054323926" expanded="true" signature="14232:14427" ph="..." />
-                <marker date="1495054323926" expanded="true" signature="14253:14398" ph="..." />
+                <marker date="1495057986264" expanded="true" signature="13091:13512" ph="..." />
+                <marker date="1495057986264" expanded="true" signature="13103:13478" ph="..." />
+                <marker date="1495057986264" expanded="true" signature="13141:13455" ph="..." />
+                <marker date="1495057986264" expanded="true" signature="13159:13433" ph="..." />
+                <marker date="1495057986264" expanded="true" signature="13165:13404" ph="..." />
+                <marker date="1495057986264" expanded="true" signature="13193:13387" ph="..." />
+                <marker date="1495057986264" expanded="true" signature="13214:13358" ph="..." />
+                <marker date="1495057986264" expanded="true" signature="14130:14552" ph="..." />
+                <marker date="1495057986264" expanded="true" signature="14142:14518" ph="..." />
+                <marker date="1495057986264" expanded="true" signature="14180:14495" ph="..." />
+                <marker date="1495057986264" expanded="true" signature="14198:14473" ph="..." />
+                <marker date="1495057986264" expanded="true" signature="14204:14444" ph="..." />
+                <marker date="1495057986264" expanded="true" signature="14232:14427" ph="..." />
+                <marker date="1495057986264" expanded="true" signature="14253:14398" ph="..." />
               </folding>
             </state>
           </provider>
@@ -203,11 +203,11 @@
         <option value="$PROJECT_DIR$/tethysapp/grace/controllers.py" />
         <option value="$PROJECT_DIR$/tethysapp/grace/ajax_controllers.py" />
         <option value="$PROJECT_DIR$/tethysapp/grace/public/css/main.css" />
-        <option value="$PROJECT_DIR$/tethysapp/grace/public/js/global_map.js" />
-        <option value="$PROJECT_DIR$/tethysapp/grace/templates/grace/global_map.html" />
-        <option value="$PROJECT_DIR$/tethysapp/grace/templates/grace/nepal_graph.html" />
-        <option value="$PROJECT_DIR$/tethysapp/grace/public/js/nepal_graph.js" />
         <option value="$PROJECT_DIR$/tethysapp/grace/utilities.py" />
+        <option value="$PROJECT_DIR$/tethysapp/grace/public/js/nepal_graph.js" />
+        <option value="$PROJECT_DIR$/tethysapp/grace/templates/grace/nepal_graph.html" />
+        <option value="$PROJECT_DIR$/tethysapp/grace/templates/grace/global_map.html" />
+        <option value="$PROJECT_DIR$/tethysapp/grace/public/js/global_map.js" />
       </list>
     </option>
   </component>
@@ -610,21 +610,21 @@
           <caret line="237" column="39" lean-forward="false" selection-start-line="237" selection-start-column="39" selection-end-line="237" selection-end-column="39" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1495055163464" expanded="true" signature="13490:13911" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13757" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13786" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13803" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13832" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13854" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13877" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13911" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14485:14907" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14497:14873" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14535:14850" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14553:14828" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14559:14799" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14587:14782" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14608:14753" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13490:13911" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13757" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13786" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13803" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13832" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13854" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13877" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13911" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14485:14907" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14497:14873" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14535:14850" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14553:14828" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14559:14799" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14587:14782" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14608:14753" ph="..." />
           </folding>
         </state>
       </provider>
@@ -659,7 +659,9 @@
         <state relative-caret-position="558">
           <caret line="31" column="56" lean-forward="false" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="56" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#5;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#5;n#div#6;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -709,21 +711,21 @@
           <caret line="237" column="39" lean-forward="false" selection-start-line="237" selection-start-column="39" selection-end-line="237" selection-end-column="39" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1495055163464" expanded="true" signature="13490:13911" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13757" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13786" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13803" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13832" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13854" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13877" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13911" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14485:14907" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14497:14873" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14535:14850" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14553:14828" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14559:14799" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14587:14782" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14608:14753" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13490:13911" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13757" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13786" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13803" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13832" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13854" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13877" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13911" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14485:14907" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14497:14873" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14535:14850" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14553:14828" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14559:14799" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14587:14782" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14608:14753" ph="..." />
           </folding>
         </state>
       </provider>
@@ -748,7 +750,9 @@
         <state relative-caret-position="558">
           <caret line="31" column="56" lean-forward="false" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="56" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#5;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#5;n#div#6;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -817,7 +821,9 @@
         <state relative-caret-position="558">
           <caret line="31" column="56" lean-forward="false" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="56" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#5;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#5;n#div#6;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -860,21 +866,21 @@
           <caret line="237" column="39" lean-forward="false" selection-start-line="237" selection-start-column="39" selection-end-line="237" selection-end-column="39" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1495055163464" expanded="true" signature="13490:13911" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13757" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13786" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13803" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13832" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13854" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13877" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13911" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14485:14907" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14497:14873" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14535:14850" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14553:14828" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14559:14799" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14587:14782" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14608:14753" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13490:13911" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13757" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13786" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13803" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13832" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13854" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13877" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13911" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14485:14907" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14497:14873" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14535:14850" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14553:14828" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14559:14799" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14587:14782" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14608:14753" ph="..." />
           </folding>
         </state>
       </provider>
@@ -947,6 +953,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/ajax_controllers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/utilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1116">
+          <caret line="362" column="57" lean-forward="true" selection-start-line="362" selection-start-column="57" selection-end-line="362" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tethysapp/grace/controllers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="936">
@@ -965,89 +991,74 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/global_map.html">
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/nepal_graph.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="91" column="8" lean-forward="false" selection-start-line="91" selection-start-column="8" selection-end-line="94" selection-end-column="140" />
-          <folding />
+        <state relative-caret-position="288">
+          <caret line="91" column="0" lean-forward="true" selection-start-line="91" selection-start-column="0" selection-end-line="96" selection-end-column="6" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#5;n#div#6;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/nepal_graph.html">
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/global_map.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="86" column="140" lean-forward="false" selection-start-line="86" selection-start-column="140" selection-end-line="86" selection-end-column="140" />
+        <state relative-caret-position="212">
+          <caret line="103" column="6" lean-forward="false" selection-start-line="103" selection-start-column="6" selection-end-line="103" selection-end-column="6" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#5;n#div#5;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#div#2;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/nepal_graph.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="617" column="0" lean-forward="true" selection-start-line="617" selection-start-column="0" selection-end-line="617" selection-end-column="0" />
+        <state relative-caret-position="279">
+          <caret line="594" column="8" lean-forward="false" selection-start-line="594" selection-start-column="8" selection-end-line="594" selection-end-column="45" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1495055163464" expanded="true" signature="13490:13911" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13757" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13786" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13803" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13832" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13854" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13877" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="13747:13911" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14485:14907" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14497:14873" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14535:14850" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14553:14828" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14559:14799" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14587:14782" ph="..." />
-            <marker date="1495055163464" expanded="true" signature="14608:14753" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13490:13911" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13757" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13786" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13803" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13832" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13854" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13877" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="13747:13911" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14485:14907" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14497:14873" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14535:14850" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14553:14828" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14559:14799" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14587:14782" ph="..." />
+            <marker date="1495057540427" expanded="true" signature="14608:14753" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/global_map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1197">
-          <caret line="559" column="43" lean-forward="true" selection-start-line="559" selection-start-column="43" selection-end-line="559" selection-end-column="43" />
+        <state relative-caret-position="495">
+          <caret line="580" column="45" lean-forward="false" selection-start-line="580" selection-start-column="45" selection-end-line="580" selection-end-column="45" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1495054323926" expanded="true" signature="13091:13512" ph="..." />
-            <marker date="1495054323926" expanded="true" signature="13103:13478" ph="..." />
-            <marker date="1495054323926" expanded="true" signature="13141:13455" ph="..." />
-            <marker date="1495054323926" expanded="true" signature="13159:13433" ph="..." />
-            <marker date="1495054323926" expanded="true" signature="13165:13404" ph="..." />
-            <marker date="1495054323926" expanded="true" signature="13193:13387" ph="..." />
-            <marker date="1495054323926" expanded="true" signature="13214:13358" ph="..." />
-            <marker date="1495054323926" expanded="true" signature="14130:14552" ph="..." />
-            <marker date="1495054323926" expanded="true" signature="14142:14518" ph="..." />
-            <marker date="1495054323926" expanded="true" signature="14180:14495" ph="..." />
-            <marker date="1495054323926" expanded="true" signature="14198:14473" ph="..." />
-            <marker date="1495054323926" expanded="true" signature="14204:14444" ph="..." />
-            <marker date="1495054323926" expanded="true" signature="14232:14427" ph="..." />
-            <marker date="1495054323926" expanded="true" signature="14253:14398" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/ajax_controllers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/utilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1116">
-          <caret line="362" column="57" lean-forward="true" selection-start-line="362" selection-start-column="57" selection-end-line="362" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <marker date="1495057986264" expanded="true" signature="13091:13512" ph="..." />
+            <marker date="1495057986264" expanded="true" signature="13103:13478" ph="..." />
+            <marker date="1495057986264" expanded="true" signature="13141:13455" ph="..." />
+            <marker date="1495057986264" expanded="true" signature="13159:13433" ph="..." />
+            <marker date="1495057986264" expanded="true" signature="13165:13404" ph="..." />
+            <marker date="1495057986264" expanded="true" signature="13193:13387" ph="..." />
+            <marker date="1495057986264" expanded="true" signature="13214:13358" ph="..." />
+            <marker date="1495057986264" expanded="true" signature="14130:14552" ph="..." />
+            <marker date="1495057986264" expanded="true" signature="14142:14518" ph="..." />
+            <marker date="1495057986264" expanded="true" signature="14180:14495" ph="..." />
+            <marker date="1495057986264" expanded="true" signature="14198:14473" ph="..." />
+            <marker date="1495057986264" expanded="true" signature="14204:14444" ph="..." />
+            <marker date="1495057986264" expanded="true" signature="14232:14427" ph="..." />
+            <marker date="1495057986264" expanded="true" signature="14253:14398" ph="..." />
           </folding>
         </state>
       </provider>
