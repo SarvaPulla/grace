@@ -17,8 +17,13 @@ var LIBRARY_OBJECT = (function() {
     /************************************************************************
      *                      MODULE LEVEL / GLOBAL VARIABLES
      *************************************************************************/
-    var chart,
+    var animationDelay,
+        sliderInterval,
+        chart,
         current_layer,
+        color_bar,
+        cb_min,
+        cb_max,
         element,
         layers,
         layers_dict,
@@ -43,10 +48,12 @@ var LIBRARY_OBJECT = (function() {
 
 
 
+
+
     /************************************************************************
      *                    PRIVATE FUNCTION DECLARATIONS
      *************************************************************************/
-    var add_wms,clear_coords,get_plot,init_slider,init_events,init_map,init_vars,update_wms;
+    var animate,add_wms,clear_coords,cbar_str,get_plot,gen_color_bar,init_slider,init_events,init_map,init_vars,update_wms,update_color_bar;
 
 
     /************************************************************************
@@ -67,6 +74,35 @@ var LIBRARY_OBJECT = (function() {
         $modalUpload = $("#modalUpload");
         $btnUpload = $("#btn-add-shp");
         plotter = $('#plotter');
+        color_bar = $layers_element.attr('data-color-bar');
+        color_bar = JSON.parse(color_bar);
+        cb_min = $layers_element.attr('data-range-min');
+        cb_max = $layers_element.attr('data-range-max');
+        animationDelay = 1000;
+        sliderInterval = {};
+    };
+    gen_color_bar = function(){
+        var cv  = document.getElementById('cv'),
+            ctx = cv.getContext('2d');
+        color_bar.forEach(function(color,i){
+            ctx.beginPath();
+            ctx.fillStyle = color[0];
+            ctx.fillRect(i*35,0,35,20);
+            ctx.fillText(color[1],i*35,30);
+        });
+
+    };
+
+    update_color_bar = function(){
+        var cv  = document.getElementById('cv'),
+            ctx = cv.getContext('2d');
+        ctx.clearRect(0,0,cv.width,cv.height);
+        color_bar.forEach(function(color,i){
+            ctx.beginPath();
+            ctx.fillStyle = color[0];
+            ctx.fillRect(i*35,0,35,20);
+            ctx.fillText(color[1],i*35,30);
+        });
     };
 
     clear_coords = function(){
@@ -333,18 +369,16 @@ var LIBRARY_OBJECT = (function() {
     };
 
     add_wms = function(){
-        // gs_layer_list.forEach(function(item){
         map.removeLayer(wms_layer);
+        var color_str = cbar_str();
         var store_name = $("#select_layer").find('option:selected').val();
-        // var layer_name = 'grace:'+item[0]+'_nepal';
         var layer_name = 'grace:'+store_name;
         var sld_string = '<StyledLayerDescriptor version="1.0.0"><NamedLayer><Name>'+layer_name+'</Name><UserStyle><FeatureTypeStyle><Rule>\
         <RasterSymbolizer> \
-        <ColorMap> \
-        <ColorMapEntry color="#000000" quantity="'+range_min+'" label="nodata" opacity="0.0" /> \
-        <ColorMapEntry color="#FF0000" quantity="0" label="label1" opacity="0.4"/>\
-        <ColorMapEntry color="#0000FF" quantity="'+range_max+'" label="label2" opacity="0.4"/>\
-        </ColorMap>\
+        <ColorMap>\
+        <ColorMapEntry color="#000000" quantity="'+cb_min+'" label="nodata" opacity="0.0" />'+
+            color_str
+            +'</ColorMap>\
         </RasterSymbolizer>\
         </Rule>\
         </FeatureTypeStyle>\
@@ -369,15 +403,15 @@ var LIBRARY_OBJECT = (function() {
     };
 
     update_wms = function(date_str){
-        // map.removeLayer(wms_layer);
+        var color_str = cbar_str();
+
         var layer_name = 'grace:'+date_str;
         var sld_string = '<StyledLayerDescriptor version="1.0.0"><NamedLayer><Name>'+layer_name+'</Name><UserStyle><FeatureTypeStyle><Rule>\
         <RasterSymbolizer> \
         <ColorMap> \
-        <ColorMapEntry color="#000000" quantity="'+range_min+'" label="nodata" opacity="0.0" /> \
-        <ColorMapEntry color="#FF0000" quantity="0" label="label1" opacity="0.4"/>\
-        <ColorMapEntry color="#0000FF" quantity="'+range_max+'" label="label2" opacity="0.4"/>\
-        </ColorMap>\
+        <ColorMapEntry color="#000000" quantity="'+cb_min+'" label="nodata" opacity="0.0" />'+
+            color_str
+            +'</ColorMap>\
         </RasterSymbolizer>\
         </Rule>\
         </FeatureTypeStyle>\
@@ -385,8 +419,17 @@ var LIBRARY_OBJECT = (function() {
         </NamedLayer>\
         </StyledLayerDescriptor>';
 
-        wms_source.updateParams({'LAYERS':layer_name,'SLD_BODY':sld_string})
+        wms_source.updateParams({'LAYERS':layer_name,'SLD_BODY':sld_string});
 
+    };
+
+    cbar_str = function(){
+        var sld_color_string = '';
+        color_bar.forEach(function(color,i){
+            var color_map_entry = '<ColorMapEntry color="'+color[0]+'" quantity="'+color[1]+'" label="label'+i+'" opacity="'+color[2]+'"/>';
+            sld_color_string += color_map_entry;
+        });
+        return sld_color_string
     };
 
 
@@ -406,6 +449,55 @@ var LIBRARY_OBJECT = (function() {
             }
         });
 
+        $( "#opacity-slider" ).slider({
+            value:0.7,
+            min: 0.2,
+            max: 1,
+            step: 0.1, //Assigning the slider step based on the depths that were retrieved in the controller
+            animate:"fast",
+            slide: function( event, ui ) {
+                var opacity = ui.value;
+                $("#opacity").val(opacity);
+                var date_idx = $("#slider").slider("option","value");
+                var date_value = $("#select_layer option")[date_idx].value;
+                color_bar.forEach(function(color,i){
+                    color[2] = opacity;
+                });
+                update_wms(date_value);
+            }
+        });
+
+        $( "#max-slider" ).slider({
+            value:50,
+            min: 1,
+            max: 50,
+            step: 1, //Assigning the slider step based on the depths that were retrieved in the controller
+            animate:"fast",
+            slide: function( event, ui ) {
+                var color_range = ui.value;
+                $("#cbar-slider").val(color_range);
+                var date_idx = $("#slider").slider("option","value");
+                var date_value = $("#select_layer option")[date_idx].value;
+                cb_max = ui.value;
+
+                var iter_size = cb_max / 10;
+                var cbar_val = -cb_max;
+                var new_cbar = [];
+                for (var i=0;i<=20;i+=1){
+                    new_cbar.push(parseFloat(cbar_val).toFixed(1));
+                    cbar_val += iter_size;
+                }
+                color_bar.forEach(function(color,i){
+                    color[1] = new_cbar[i];
+                });
+
+                update_color_bar();
+                update_wms(date_value);
+
+
+            }
+        });
+
     };
 
     get_plot = function(){
@@ -418,7 +510,7 @@ var LIBRARY_OBJECT = (function() {
 
         var datastring = $get_plot.serialize();
 
-         $.ajax({
+        $.ajax({
             type:"POST",
             url:'/apps/grace/plot/',
             dataType:'HTML',
@@ -426,41 +518,41 @@ var LIBRARY_OBJECT = (function() {
             success:function(result) {
                 var json_response = JSON.parse(result);
                 $("#plotter").highcharts({
-                     chart: {
-                            type:'area',
-                            zoomType: 'x'
+                    chart: {
+                        type:'area',
+                        zoomType: 'x'
+                    },
+                    title: {
+                        text:"Values at " +json_response.location,
+                        style: {
+                            fontSize: '11px'
+                        }
+                    },
+                    xAxis: {
+                        type: 'datetime',
+                        labels: {
+                            format: '{value:%d %b %Y}',
+                            rotation: 45,
+                            align: 'left'
                         },
                         title: {
-                            text:"Values at " +json_response.location,
-                            style: {
-                                fontSize: '11px'
-                            }
-                        },
-                        xAxis: {
-                            type: 'datetime',
-                            labels: {
-                                format: '{value:%d %b %Y}',
-                                rotation: 45,
-                                align: 'left'
-                            },
-                            title: {
-                                text: 'Date'
-                            }
-                        },
-                        yAxis: {
-                            title: {
-                                text: "LWE Thickness (cm)"
-                            }
+                            text: 'Date'
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: "LWE Thickness (cm)"
+                        }
 
-                        },
-                        exporting: {
-                            enabled: true
-                        },
-                        series: [{
-                            data:json_response.values,
-                            name: "LWE Thickness"
-                        }]
-                    });
+                    },
+                    exporting: {
+                        enabled: true
+                    },
+                    series: [{
+                        data:json_response.values,
+                        name: "LWE Thickness"
+                    }]
+                });
 
             }
         });
@@ -468,6 +560,39 @@ var LIBRARY_OBJECT = (function() {
 
     $("#btn-get-plot").on('click',get_plot);
 
+    animate = function(){
+        var sliderVal = $("#slider").slider("value");
+
+        sliderInterval = setInterval(function() {
+            sliderVal += 1;
+            $("#slider").slider("value", sliderVal);
+            if (sliderVal===gs_layer_list.length - 1) sliderVal=0;
+        }, animationDelay);
+    };
+    $(".btn-run").on("click", animate);
+    //Set the slider value to the current value to start the animation at the );
+    $(".btn-stop").on("click", function() {
+        //Call clearInterval to stop the animation.
+        clearInterval(sliderInterval);
+    });
+
+    $(".btn-increase").on("click", function() {
+        clearInterval(sliderInterval);
+
+        if(animationDelay > 250){
+
+            animationDelay = animationDelay - 250;
+            animate();
+        }
+
+    });
+
+    //Decrease the slider timer when you click decrease the speed
+    $(".btn-decrease").on("click", function() {
+        clearInterval(sliderInterval);
+        animationDelay = animationDelay + 250;
+        animate();
+    });
 
     /************************************************************************
      *                        DEFINE PUBLIC INTERFACE
@@ -489,40 +614,20 @@ var LIBRARY_OBJECT = (function() {
         init_events();
         init_vars();
         init_slider();
+        gen_color_bar();
 
-
-
+        chart.legend.update({enabled:false});
+        $("#speed").val(animationDelay/1000);
         $("#select_layer").change(function(){
             add_wms();
-            // var selected_option = $(this).find('option:selected').val();
-            // var lyr_str = 'grace:'+selected_option;
-            // map.addLayer(layers_dict[lyr_str]);
+
+            var selected_option = $(this).find('option:selected').index();
+            $("#slider").slider("value", selected_option);
+
         }).change();
 
-        // $("#slider").on("slidechange", function(event, ui) {
-        //
-        //               $( "#grace-date" ).val(result['map_forecast'][ui.value - 1][0]); //The text below the slider
-        //               var decimal_value = range_value.toString().split(".").join("");
-        //
-        //           });
 
-        var animationDelay = 1000;
-        var sliderInterval = {};
 
-        $(".btn-run").on("click", function() {
-            //Set the slider value to the current value to start the animation at the correct point.
-
-            var sliderVal = $("#slider").slider("value");
-            sliderInterval = setInterval(function() {
-                sliderVal += 1;
-                $("#slider").slider("value", sliderVal);
-                if (sliderVal===gs_layer_list.length - 1) sliderVal=0;
-            }, animationDelay);
-        });
-        $(".btn-stop").on("click", function() {
-            //Call clearInterval to stop the animation.
-            clearInterval(sliderInterval);
-        });
 
         $("#slider").on("slidechange", function(event, ui) {
             var x = tracker[ui.value];

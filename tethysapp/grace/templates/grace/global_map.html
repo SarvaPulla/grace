@@ -60,7 +60,7 @@
 <b>Map Interaction</b>
 <select id="types" class="btn btn-xs btn-success" data-width="fit">
     <option value="None">None</option>
-    <!--<option value="Point">Point</option>-->
+    <option value="Point">Point</option>
     <!--<option value="Polygon">Polygon</option>-->
     <!--<option value="Upload">Upload Shapefile</option>-->
 </select>
@@ -84,18 +84,17 @@
         width:100%;
         height:500px;
     }
-    #cv{
-
-    }
 
 </style>
 <div id="control-bar" class="control-bar row">
-    <div class="animation col-md-1">
+    <div class="animation col-md-2">
         <!--<div class="btn-toolbar" role="toolbar" align="center"></div>-->
         <div class="btn btn-success btn-group btn-xs btn-run" role="group"><span class="glyphicon glyphicon-play"></span></div>
         <div class="btn btn-danger btn-group btn-xs btn-stop" role="group"><span class="glyphicon glyphicon-pause"></span></div>
+        <div class="btn btn-danger btn-group btn-xs btn-decrease" role="group"><span class="glyphicon glyphicon-fast-backward"></span></div>
+        <div class="btn btn-success btn-group btn-xs btn-increase" role="group"><span class="glyphicon glyphicon-fast-forward"></span></div>
     </div>
-    <div id="slider" class="col-md-11"></div>
+    <div id="slider" class="col-md-10"></div>
 </div>
 <label id="label" for="grace-date">Day:</label>
 <input type="text" id="grace-date" readonly style="border:0; color:#f6931f; font-weight:normal;" value="2002 April 16">
@@ -105,7 +104,7 @@
 <br>
 <b>Legend Controls</b>
 <br>
-<canvas id="cv" width="1200px" height="50px"></canvas>
+<canvas id="cv" width="1100px" height="50px"></canvas>
 
 <div id="slider-label">
     <div class="col-md-4">
@@ -115,9 +114,9 @@
     <div class="col-md-2"></div>
     <div class="col-md-6">
         <label id="cbar-label" for="opacity">Colorbar Max:</label>
-    <input type="text" id="cbar-slider" readonly style="border:0; color:#f6931f; font-weight:normal;" value="50">
+        <input type="text" id="cbar-slider" readonly style="border:0; color:#f6931f; font-weight:normal;" value="50">
     </div>
-<div id="legend-bar"><div id="opacity-slider" class="col-md-4"></div><div class="col-md-2"></div><div id="max-slider" class="col-md-6"></div></div>
+    <div id="legend-bar"><div id="opacity-slider" class="col-md-4"></div><div class="col-md-2"></div><div id="max-slider" class="col-md-6"></div></div>
 </div>
 
 <div id="layers" name="layers" data-slider-max="{{slider_max}}"  data-color-bar="{{color_bar}}" data-range-min="-50" data-range-max="50" style="display:none;"></div>

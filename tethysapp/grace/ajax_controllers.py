@@ -13,8 +13,8 @@ def get_plot(request):
     if request.is_ajax() and request.method == 'POST':
         # Get the point/polygon/shapefile coordinates along with the selected variable
         pt_coords = request.POST['point-lat-lon']
-        poly_coords = request.POST['poly-lat-lon']
-        shp_bounds = request.POST['shp-lat-lon']
+        # poly_coords = request.POST['poly-lat-lon']
+        # shp_bounds = request.POST['shp-lat-lon']
 
         if pt_coords:
             graph = get_pt_plot(pt_coords)

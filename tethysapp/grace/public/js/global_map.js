@@ -17,7 +17,8 @@ var LIBRARY_OBJECT = (function() {
     /************************************************************************
      *                      MODULE LEVEL / GLOBAL VARIABLES
      *************************************************************************/
-    var $btnUpload,
+    var animationDelay,
+        $btnUpload,
         current_layer,
         color_bar,
         cb_min,
@@ -34,16 +35,14 @@ var LIBRARY_OBJECT = (function() {
         shp_source,
         shp_layer,
         slider_max,
+        sliderInterval,
         wms_source,
         wms_layer;
-
-
-
 
     /************************************************************************
      *                    PRIVATE FUNCTION DECLARATIONS
      *************************************************************************/
-    var add_wms,clear_coords,cbar_str,get_plot,gen_color_bar,init_slider,init_events,init_map,init_vars,update_wms,update_color_bar;
+    var animate,add_wms,clear_coords,cbar_str,get_plot,gen_color_bar,init_slider,init_events,init_map,init_vars,update_wms,update_color_bar;
 
 
     /************************************************************************
@@ -60,6 +59,8 @@ var LIBRARY_OBJECT = (function() {
         $get_plot = $('#get-plot');
         $modalUpload = $("#modalUpload");
         $btnUpload = $("#btn-add-shp");
+        animationDelay  = 1000;
+        sliderInterval = {};
     };
 
     gen_color_bar = function(){
@@ -68,8 +69,8 @@ var LIBRARY_OBJECT = (function() {
         color_bar.forEach(function(color,i){
             ctx.beginPath();
             ctx.fillStyle = color[0];
-            ctx.fillRect(i*53,0,53,20);
-            ctx.fillText(color[1],i*53,30);
+            ctx.fillRect(i*35,0,35,20);
+            ctx.fillText(color[1],i*35,30);
         });
 
     };
@@ -81,8 +82,8 @@ var LIBRARY_OBJECT = (function() {
         color_bar.forEach(function(color,i){
             ctx.beginPath();
             ctx.fillStyle = color[0];
-            ctx.fillRect(i*53,0,53,20);
-            ctx.fillText(color[1],i*53,30);
+            ctx.fillRect(i*35,0,35,20);
+            ctx.fillText(color[1],i*35,30);
         });
     };
     clear_coords = function(){
@@ -386,7 +387,7 @@ var LIBRARY_OBJECT = (function() {
     update_wms = function(date_str){
         // map.removeLayer(wms_layer);
         var color_str = cbar_str();
-        
+
         var layer_name = 'globalgrace:'+date_str;
         var sld_string = '<StyledLayerDescriptor version="1.0.0"><NamedLayer><Name>'+layer_name+'</Name><UserStyle><FeatureTypeStyle><Rule>\
         <RasterSymbolizer> \
@@ -544,6 +545,40 @@ var LIBRARY_OBJECT = (function() {
     };
 
     $("#btn-get-plot").on('click',get_plot);
+
+    animate = function(){
+        var sliderVal = $("#slider").slider("value");
+
+        sliderInterval = setInterval(function() {
+            sliderVal += 1;
+            $("#slider").slider("value", sliderVal);
+            if (sliderVal===slider_max - 1) sliderVal=0;
+        }, animationDelay);
+    };
+    $(".btn-run").on("click", animate);
+    //Set the slider value to the current value to start the animation at the );
+    $(".btn-stop").on("click", function() {
+        //Call clearInterval to stop the animation.
+        clearInterval(sliderInterval);
+    });
+
+    $(".btn-increase").on("click", function() {
+        clearInterval(sliderInterval);
+
+        if(animationDelay > 250){
+
+            animationDelay = animationDelay - 250;
+            animate();
+        }
+
+    });
+
+    //Decrease the slider timer when you click decrease the speed
+    $(".btn-decrease").on("click", function() {
+        clearInterval(sliderInterval);
+        animationDelay = animationDelay + 250;
+        animate();
+    });
     /************************************************************************
      *                        DEFINE PUBLIC INTERFACE
      *************************************************************************/
@@ -567,25 +602,10 @@ var LIBRARY_OBJECT = (function() {
         gen_color_bar();
         $("#select_layer").change(function(){
             add_wms();
+            var selected_option = $(this).find('option:selected').index();
+            $("#slider").slider("value", selected_option);
         }).change();
 
-        var animationDelay = 1000;
-        var sliderInterval = {};
-
-        $(".btn-run").on("click", function() {
-            //Set the slider value to the current value to start the animation at the correct point.
-
-            var sliderVal = $("#slider").slider("value");
-            sliderInterval = setInterval(function() {
-                sliderVal += 1;
-                $("#slider").slider("value", sliderVal);
-                if (sliderVal=== slider_max - 1) sliderVal=0;
-            }, animationDelay);
-        });
-        $(".btn-stop").on("click", function() {
-            //Call clearInterval to stop the animation.
-            clearInterval(sliderInterval);
-        });
 
         $("#slider").on("slidechange", function(event, ui) {
             var date_text = $("#select_layer option")[ui.value].text;

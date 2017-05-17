@@ -308,60 +308,52 @@ def get_pt_plot(pt_coords):
 
     ts_plot = []
 
-    app_workspace = Grace.get_app_workspace()
+    nc_file = '/grace/nepal/nepal.nc'
 
-    file_input_dir = '/home/tethys/netcdf/Nepal/'
+    coords = pt_coords.split(',')
+    stn_lat = float(coords[1])
+    stn_lon = float(coords[0])
 
-    for file in os.listdir(file_input_dir):
-        nc_file = file_input_dir+file
-        print nc_file
+    nc_fid = Dataset(nc_file,'r')
+    nc_var = nc_fid.variables  # Get the netCDF variables
+    nc_var.keys()  # Getting variable keys
 
-        coords = pt_coords.split(',')
-        stn_lat = float(coords[1])
-        stn_lon = float(coords[0])
+    time = nc_var['time'][:]
+    start_date = '01/01/2002'
+    date_str = datetime.strptime(start_date, "%m/%d/%Y")  # Start Date string.
+    lat = nc_var['lat'][:]
+    lon = nc_var['lon'][:]
 
-        nc_fid = Dataset(nc_file,'r')
-        nc_var = nc_fid.variables  # Get the netCDF variables
-        nc_var.keys()  # Getting variable keys
+    for timestep, v in enumerate(time):
 
-        time = nc_var['time'][:]
-        start_date = '01/01/2002'
-        date_str = datetime.strptime(start_date, "%m/%d/%Y")  # Start Date string.
-        lat = nc_var['lat'][:]
-        lon = nc_var['lon'][:]
+        current_time_step = nc_var['lwe_thickness'][timestep, :, :]  # Getting the index of the current timestep
 
-        for timestep, v in enumerate(time):
+        end_date = date_str + timedelta(days=float(v))  # Actual human readable date of the timestep
 
-            current_time_step = nc_var['lwe_thickness'][timestep, :, :]  # Getting the index of the current timestep
+        data = nc_var['lwe_thickness'][timestep,:,:]
 
-            end_date = date_str + timedelta(days=float(v))  # Actual human readable date of the timestep
+        lon_idx = (np.abs(lon - stn_lon)).argmin()
+        lat_idx = (np.abs(lat - stn_lat)).argmin()
 
-            data = nc_var['lwe_thickness'][timestep,:,:]
+        value = data[lat_idx,lon_idx]
 
-            lon_idx = (np.abs(lon - stn_lon)).argmin()
-            lat_idx = (np.abs(lat - stn_lat)).argmin()
+        time_stamp = calendar.timegm(end_date.utctimetuple()) * 1000
 
-            value = data[lat_idx,lon_idx]
+        ts_plot.append([time_stamp,round(float(value),3)])
+        ts_plot.sort()
 
-            time_stamp = calendar.timegm(end_date.utctimetuple()) * 1000
+    graph_json["values"] = ts_plot
+    graph_json["point"] = [round(stn_lat,2),round(stn_lon,2)]
+    graph_json = json.dumps(graph_json)
 
-            ts_plot.append([time_stamp,round(float(value),3)])
-            ts_plot.sort()
-
-        graph_json["values"] = ts_plot
-        graph_json["point"] = [round(stn_lat,2),round(stn_lon,2)]
-        graph_json = json.dumps(graph_json)
-
-        return graph_json
+    return graph_json
 
 def get_global_plot(pt_coords):
     graph_json = {}
 
     ts_plot = []
 
-    app_workspace = Grace.get_app_workspace()
-
-    nc_file = '/home/tethys/netcdf/Global/grace.nc'
+    nc_file = '/grace/global/GRCTellus.JPL.200204_201608.GLO.RL05M_1.MSCNv02CRIv02.nc'
 
     coords = pt_coords.split(',')
     stn_lat = float(coords[1])

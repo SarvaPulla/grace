@@ -48,19 +48,19 @@
 {% endblock %}
 
 {% block app_navigation_items %}
-  <li class="title">App Navigation</li>
-  <li {% if request.path == '/apps/grace/' %} class="active" {% endif %}><a href="{% url 'grace:home' %}">Instructions</a></li>
-    <li {% if 'global-map' in request.path  %} class="active" {% endif %}><a href="{% url 'grace:global-map' %}">Global Map</a></li>
-  <li {% if 'nepal-graph' in request.path  %} class="active" {% endif %}><a href="{% url 'grace:nepal-graph' %}">Nepal Graph</a></li>
+<li class="title">App Navigation</li>
+<li {% if request.path == '/apps/grace/' %} class="active" {% endif %}><a href="{% url 'grace:home' %}">Instructions</a></li>
+<li {% if 'global-map' in request.path  %} class="active" {% endif %}><a href="{% url 'grace:global-map' %}">Global Map</a></li>
+<li {% if 'nepal-graph' in request.path  %} class="active" {% endif %}><a href="{% url 'grace:nepal-graph' %}">Nepal Graph</a></li>
 <br/>
 <div id="day_selector">
-{% gizmo select_input select_layer %}
+    {% gizmo select_input select_layer %}
 </div>
 <br>
 <b>Map Interaction</b>
 <select id="types" class="btn btn-xs btn-success" data-width="fit">
     <option value="None">None</option>
-    <!--<option value="Point">Point</option>-->
+    <option value="Point">Point</option>
     <!--<option value="Polygon">Polygon</option>-->
     <!--<option value="Upload">Upload Shapefile</option>-->
 </select>
@@ -69,8 +69,8 @@
 <form id="get-plot" name="get-plot" action="get_plot/" method="POST">
     {% csrf_token %}
     <input type="text" name="point-lat-lon" id="point-lat-lon" hidden>
-    <input type="text" name="poly-lat-lon" id="poly-lat-lon" hidden>
-    <input type="text" name="shp-lat-lon" id="shp-lat-lon" hidden>
+    <!--<input type="text" name="poly-lat-lon" id="poly-lat-lon" hidden>-->
+    <!--<input type="text" name="shp-lat-lon" id="shp-lat-lon" hidden>-->
     <button type="button" id="btn-get-plot" name="btn-get-plot" class="btn btn-default">Show Plot</button>
 </form>
 <div class="warning"></div>
@@ -79,12 +79,14 @@
 {% block app_content %}
 
 <div id="control-bar" class="control-bar row">
-  <div class="animation col-md-1">
-    <!--<div class="btn-toolbar" role="toolbar" align="center"></div>-->
-    <div class="btn btn-success btn-group btn-xs btn-run" role="group"><span class="glyphicon glyphicon-play"></span></div>
-    <div class="btn btn-danger btn-group btn-xs btn-stop" role="group"><span class="glyphicon glyphicon-pause"></span></div>
-</div>
-<div id="slider" class="col-md-11"></div>
+    <div class="animation col-md-2">
+        <!--<div class="btn-toolbar" role="toolbar" align="center"></div>-->
+        <div class="btn btn-success btn-group btn-xs btn-run" role="group"><span class="glyphicon glyphicon-play"></span></div>
+        <div class="btn btn-danger btn-group btn-xs btn-stop" role="group"><span class="glyphicon glyphicon-pause"></span></div>
+        <div class="btn btn-danger btn-group btn-xs btn-decrease" role="group"><span class="glyphicon glyphicon-fast-backward"></span></div>
+        <div class="btn btn-success btn-group btn-xs btn-increase" role="group"><span class="glyphicon glyphicon-fast-forward"></span></div>
+    </div>
+    <div id="slider" class="col-md-10"></div>
 </div>
 <label id="label" for="grace-date">Day:</label>
 <input type="text" id="grace-date" readonly style="border:0; color:#f6931f; font-weight:normal;" value="2002 April 16">
@@ -92,21 +94,39 @@
 <br>
 <div id="map" class="map"></div>
 <div id="popup" class="popup"></div>
-    {% gizmo plot_view grace_plot %}
-<div id="layers" name="layers" data-layers="{{layers_json}}" data-range="{{range}}" data-tracker="{{x_tracker}}"  style="display:none;"></div>
 <br>
-<div>
-    <div class="chart-wrapper">
-        <div class="chart-inner">
-            <div id="plotter" name="plotter" style="height:275px;width:100%" ></div>
+<b>Legend Controls</b>
+<br>
+<canvas id="cv" width="1100px" height="50px"></canvas>
+
+<div id="slider-label">
+    <div class="col-md-4">
+        <label id="opacity-label" for="opacity">Opacity:</label>
+        <input type="text" id="opacity" readonly style="border:0; color:#f6931f; font-weight:normal;" value="0.7">
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+        <label id="cbar-label" for="opacity">Colorbar Max:</label>
+        <input type="text" id="cbar-slider" readonly style="border:0; color:#f6931f; font-weight:normal;" value="50">
+    </div>
+    <br><br>
+    <div id="legend-bar"><div id="opacity-slider" class="col-md-4"></div><div class="col-md-2"></div><div id="max-slider" class="col-md-6"></div></div>
+    {% gizmo plot_view grace_plot %}
+    <div id="layers" name="layers" data-layers="{{layers_json}}" data-range="{{range}}" data-tracker="{{x_tracker}}"  data-color-bar="{{color_bar}}" data-range-min="-50" data-range-max="50" style="display:none;"></div>
+    <br>
+    <br>
+    <div>
+        <div class="chart-wrapper">
+            <div class="chart-inner">
+                <div id="plotter" name="plotter" style="height:275px;width:100%" ></div>
+            </div>
         </div>
     </div>
-</div>
 
-{% endblock %}
+    {% endblock %}
 
-{% block scripts %}
-  {{ block.super }}
-  <script src="/static/tethys_gizmos/js/plot_view.js" type="text/javascript"></script>
-  <script src="{% static 'grace/js/nepal_graph.js' %}" type="text/javascript"></script>
-{% endblock %}
+    {% block scripts %}
+    {{ block.super }}
+    <script src="/static/tethys_gizmos/js/plot_view.js" type="text/javascript"></script>
+    <script src="{% static 'grace/js/nepal_graph.js' %}" type="text/javascript"></script>
+    {% endblock %}

@@ -121,9 +121,10 @@ def nepal_graph(request):
     legend_json = json.dumps(legend_list)
     x_tracker = json.dumps(x_tracker)
 
+    color_bar = get_color_bar()
+    color_bar = json.dumps(color_bar)
 
-
-    context = {'grace_plot': grace_plot,'select_layer':select_layer,'layers_json':legend_json,'range':range,'slider_max':slider_max,'x_tracker':x_tracker}
+    context = {'grace_plot': grace_plot,'select_layer':select_layer,'layers_json':legend_json,'range':range,'slider_max':slider_max,'x_tracker':x_tracker,"color_bar":color_bar}
 
     return render(request, 'grace/nepal_graph.html', context)
 
