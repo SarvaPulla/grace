@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from tethys_sdk.gizmos import *
 import csv, os
 from datetime import datetime,timedelta
@@ -9,33 +9,31 @@ from grace import *
 from utilities import *
 import json,time
 from .app import Grace
+from model import *
 
 @login_required()
 def home(request):
     """
     Controller for the app home page.
     """
-    # file_dir = '/home/tethys/geotiff_clipped/'
-    # output_dir = '/home/tethys/geotiff_global/'
+    session = SessionMaker()
+    # Query DB for geoservers
+    regions = session.query(Region).all()
+    region_list = []
+    for region in regions:
+        region_list.append(("%s" % (region.display_name),region.id))
 
-    # create_global_geotiffs(file_dir,output_dir)
-    # infile = '/home/tethys/netcdf/grace.nc'
-    # var_name = 'lwe_thickness'
-    # xsize, ysize, GeoT,NDV= get_netcdf_info_global(infile,var_name)
-    # create_global_tiff(var_name,xsize,ysize,GeoT,NDV)
+    session.close()
+    if region_list:
+        region_select = SelectInput(display_text='Select a Region',
+                                       name='region-select',
+                                       options=region_list,)
+    else:
+        region_select = None
 
-    # create_geotiffs(file_dir,output_dir)
-    # file_dir = '/home/tethys/geotiff_global/'
-    # geoserver_rest_url = 'http://tethys.byu.edu:8181/geoserver/rest'
-    # workspace = 'globalgrace'
-    # upload__global_tiff(file_dir, geoserver_rest_url, workspace)
-    # file_dir = '/home/tethys/netcdf/'
-    # output_dir = '/home/tethys/'
-    # get_max_min(file_dir,output_dir)
-    # clip_raster()
-    # clip_world()
-    # create_world_json()
-    context = {}
+
+
+    context = {"region_select ":region_select,"regions_length":len(regions)}
 
     return render(request, 'grace/home.html', context)
 
@@ -159,3 +157,175 @@ def global_map(request):
     context = {'select_layer':select_layer,'slider_max':slider_max,"color_bar":color_bar}
 
     return render(request, 'grace/global_map.html', context)
+
+@user_passes_test(user_permission_test)
+def add_region(request):
+
+    region_name_input = TextInput(display_text='Region Display Name',
+                                     name='region-name-input',
+                                     placeholder='e.g.: Utah',
+                                     icon_append='glyphicon glyphicon-home',
+                                     ) #Input for the Region Display Name
+
+    session = SessionMaker()
+    # Query DB for geoservers
+    geoservers = session.query(Geoserver).all()
+    geoserver_list = []
+    for geoserver in geoservers:
+        geoserver_list.append(( "%s (%s)" % (geoserver.name, geoserver.url),
+                               geoserver.id))
+
+    session.close()
+    if geoserver_list:
+        geoserver_select = SelectInput(display_text='Select a Geoserver',
+                                       name='geoserver-select',
+                                       options=geoserver_list,)
+    else:
+        geoserver_select = None
+
+    add_button = Button(display_text='Add Region',
+                        icon='glyphicon glyphicon-plus',
+                        style='success',
+                        name='submit-add-region',
+                        attributes={'id': 'submit-add-region'}, )  # Add region button
+
+    context = {"region_name_input":region_name_input, "geoserver_select": geoserver_select,"add_button":add_button}
+    return render(request, 'grace/add_region.html', context)
+
+@user_passes_test(user_permission_test)
+def add_geoserver(request):
+    """
+        Controller for the app add_geoserver page.
+    """
+
+    geoserver_name_input = TextInput(display_text='Geoserver Name',
+                                     name='geoserver-name-input',
+                                     placeholder='e.g.: BYU Geoserver',
+                                     icon_append='glyphicon glyphicon-tag', )
+
+    geoserver_url_input = TextInput(display_text='Geoserver REST Url',
+                                    name='geoserver-url-input',
+                                    placeholder='e.g.: http://tethys.byu.edu:8181/geoserver/rest',
+                                    icon_append='glyphicon glyphicon-cloud-download')
+
+    geoserver_username_input = TextInput(display_text='Geoserver Username',
+                                         name='geoserver-username-input',
+                                         placeholder='e.g.: admin',
+                                         icon_append='glyphicon glyphicon-user', )
+
+    add_button = Button(display_text='Add Geoserver',
+                        icon='glyphicon glyphicon-plus',
+                        style='success',
+                        name='submit-add-geoserver',
+                        attributes={'id': 'submit-add-geoserver'}, )
+
+    context = {
+        'geoserver_name_input': geoserver_name_input,
+        'geoserver_url_input': geoserver_url_input,
+        'geoserver_username_input': geoserver_username_input,
+        'add_button': add_button,
+    }
+
+    return render(request, 'grace/add_geoserver.html', context)
+
+@user_passes_test(user_permission_test)
+def manage_regions(request):
+    """
+    Controller for the app manage_geoservers page.
+    """
+    #initialize session
+    session = SessionMaker()
+    num_regions = session.query(Region).count()
+
+    session.close()
+
+    context = {
+                'initial_page': 0,
+                'num_regions': num_regions,
+              }
+
+    return render(request, 'grace/manage_regions.html', context)
+
+@user_passes_test(user_permission_test)
+def manage_regions_table(request):
+    """
+    Controller for the app manage_geoservers page.
+    """
+    #initialize session
+    session = SessionMaker()
+    RESULTS_PER_PAGE = 5
+    page = int(request.GET.get('page'))
+
+    # Query DB for data store types
+    regions = session.query(Region)\
+                        .order_by(Region.display_name) \
+                        .all()[(page * RESULTS_PER_PAGE):((page + 1)*RESULTS_PER_PAGE)]
+
+    prev_button = Button(display_text='Previous',
+                         name='prev_button',
+                         attributes={'class':'nav_button'},)
+
+    next_button = Button(display_text='Next',
+                         name='next_button',
+                         attributes={'class':'nav_button'},)
+
+    context = {
+                'prev_button' : prev_button,
+                'next_button': next_button,
+                'regions': regions,
+              }
+
+    session.close()
+
+    return render(request, 'grace/manage_regions_table.html', context)
+@user_passes_test(user_permission_test)
+def manage_geoservers(request):
+    """
+    Controller for the app manage_geoservers page.
+    """
+    #initialize session
+    session = SessionMaker()
+    num_geoservers = session.query(Geoserver).count()
+    session.close()
+
+    context = {
+                'initial_page': 0,
+                'num_geoservers': num_geoservers,
+              }
+
+    return render(request, 'grace/manage_geoservers.html', context)
+
+@user_passes_test(user_permission_test)
+def manage_geoservers_table(request):
+    """
+    Controller for the app manage_geoservers page.
+    """
+    #initialize session
+    session = SessionMaker()
+    RESULTS_PER_PAGE = 5
+    page = int(request.GET.get('page'))
+
+    # Query DB for data store types
+    geoservers = session.query(Geoserver)\
+                        .order_by(Geoserver.name, Geoserver.url) \
+                        .all()[(page * RESULTS_PER_PAGE):((page + 1)*RESULTS_PER_PAGE)]
+
+    prev_button = Button(display_text='Previous',
+                         name='prev_button',
+                         attributes={'class':'nav_button'},)
+
+    next_button = Button(display_text='Next',
+                         name='next_button',
+                         attributes={'class':'nav_button'},)
+
+    context = {
+                'prev_button' : prev_button,
+                'next_button': next_button,
+                'geoservers': geoservers,
+              }
+
+    session.close()
+
+    return render(request, 'grace/manage_geoservers_table.html', context)
+
+

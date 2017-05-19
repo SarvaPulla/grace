@@ -582,7 +582,7 @@ var LIBRARY_OBJECT = (function() {
         if(animationDelay > 250){
 
             animationDelay = animationDelay - 250;
-            $("#speed").val(animationDelay/1000);
+            $("#speed").val(1/(animationDelay/1000));
             animate();
         }
 
@@ -592,7 +592,7 @@ var LIBRARY_OBJECT = (function() {
     $(".btn-decrease").on("click", function() {
         clearInterval(sliderInterval);
         animationDelay = animationDelay + 250;
-        $("#speed").val(animationDelay/1000);
+        $("#speed").val(1/(animationDelay/1000));
         animate();
     });
 
@@ -619,7 +619,7 @@ var LIBRARY_OBJECT = (function() {
         gen_color_bar();
 
         chart.legend.update({enabled:false});
-        $("#speed").val(animationDelay/1000);
+        $("#speed").val(1/(animationDelay/1000));
         $("#select_layer").change(function(){
             add_wms();
 

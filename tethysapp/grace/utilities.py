@@ -18,6 +18,9 @@ from grace import get_netcdf_info
 from .app import Grace
 import json
 
+#Check if the user is superuser or staff. Only the superuser or staff have the permission to add and manage watersheds.
+def user_permission_test(user):
+    return user.is_superuser or user.is_staff
 #
 # def create_global_geotiffs(file_dir,geotiff_dir):
 #

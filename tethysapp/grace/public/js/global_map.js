@@ -568,7 +568,7 @@ var LIBRARY_OBJECT = (function() {
         if(animationDelay > 250){
 
             animationDelay = animationDelay - 250;
-            $("#speed").val(animationDelay/1000);
+            $("#speed").val(1/(animationDelay/1000));
             animate();
         }
 
@@ -578,9 +578,24 @@ var LIBRARY_OBJECT = (function() {
     $(".btn-decrease").on("click", function() {
         clearInterval(sliderInterval);
         animationDelay = animationDelay + 250;
-        $("#speed").val(animationDelay/1000);
+        $("#speed").val(1/(animationDelay/1000));
         animate();
     });
+
+    // function get_geoserver_data(){
+    //     var geoserver_url = 'http://127.0.0.1:8181/geoserver/grace_subset_regions/ows?service=WFS&version=1.0.0&request=GetFeature&typeNames=grace_subset_regions:NepalOutline&outputFormat=json&format_options=callback:getJson';
+    //     $.ajax({
+    //         jsonp: false,
+    //         jsonpCallback: 'getJson',
+    //         type: 'GET',
+    //         url: geoserver_url,
+    //         async: true,
+    //         dataType: 'json',
+    //         success: function(data) {
+    //             console.log(data);
+    //         }
+    //     });
+    // };
     /************************************************************************
      *                        DEFINE PUBLIC INTERFACE
      *************************************************************************/
@@ -602,7 +617,8 @@ var LIBRARY_OBJECT = (function() {
         init_vars();
         init_slider();
         gen_color_bar();
-        $("#speed").val(animationDelay/1000);
+        // get_geoserver_data();
+        $("#speed").val(1/(animationDelay/1000));
 
         $("#select_layer").change(function(){
             add_wms();
