@@ -16,24 +16,24 @@ def home(request):
     """
     Controller for the app home page.
     """
-    session = SessionMaker()
-    # Query DB for geoservers
-    regions = session.query(Region).all()
-    region_list = []
-    for region in regions:
-        region_list.append(("%s" % (region.display_name),region.id))
+    # session = SessionMaker()
+    # # Query DB for geoservers
+    # regions = session.query(Region).all()
+    # region_list = []
+    # for region in regions:
+    #     region_list.append(("%s" % (region.display_name),region.id))
+    #
+    # session.close()
+    # if region_list:
+    #     region_select = SelectInput(display_text='Select a Region',
+    #                                    name='region-select',
+    #                                    options=region_list,)
+    # else:
+    #     region_select = None
 
-    session.close()
-    if region_list:
-        region_select = SelectInput(display_text='Select a Region',
-                                       name='region-select',
-                                       options=region_list,)
-    else:
-        region_select = None
 
 
-
-    context = {"region_select ":region_select,"regions_length":len(regions)}
+    context = {}
 
     return render(request, 'grace/home.html', context)
 
