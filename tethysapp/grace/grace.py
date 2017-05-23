@@ -7,9 +7,10 @@ import os, tempfile, shutil,sys
 import gdal
 import ogr
 import osr
-import requests
+import requests, urlparse
 import csv
 from tethys_dataset_services.engines import GeoServerSpatialDatasetEngine
+from model import *
 
 def create_geotiffs(file_dir,geotiff_dir):
 
@@ -42,7 +43,6 @@ def create_geotiffs(file_dir,geotiff_dir):
                 end_date = date_str + timedelta(days=float(v)) #Actual human readable date of the timestep
 
                 ts_file_name = end_date.strftime("%Y_%m_%d") #Changing the date string format
-
                 fts_vals = set() #Creating an empty set to store the values for the timestep
 
                 for i in current_time_step.compressed(): #Compressed ignores null values and returns an array of values that exist
@@ -178,9 +178,7 @@ def upload_tiff(dir,region,geoserver_rest_url,workspace,uname,pwd):
         data = open(dir+file,'rb').read() #Read the file
         store_name = file.split('.')[0]+'_'+region #Creating the store name dynamically
         request_url = '{0}workspaces/{1}/coveragestores/{2}/file.geotiff'.format(geoserver_rest_url,ws_name,store_name) #Creating the rest url
-
         requests.put(request_url,headers=headers,data=data,auth=(uname,pwd)) #Creating the resource on the geoserver
-
 
 def get_max_min(file_dir,output_dir):
     # Specify the relative file location

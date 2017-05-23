@@ -11,31 +11,134 @@ import json,time
 from .app import Grace
 from model import *
 
+NETCDF_DIR = '/grace/'
+
 @login_required()
 def home(request):
     """
     Controller for the app home page.
     """
-    # session = SessionMaker()
-    # # Query DB for geoservers
-    # regions = session.query(Region).all()
-    # region_list = []
-    # for region in regions:
-    #     region_list.append(("%s" % (region.display_name),region.id))
-    #
-    # session.close()
-    # if region_list:
-    #     region_select = SelectInput(display_text='Select a Region',
-    #                                    name='region-select',
-    #                                    options=region_list,)
-    # else:
-    #     region_select = None
+    session = SessionMaker()
+    # Query DB for regions
+    regions = session.query(Region).all()
+    region_list = []
+    for region in regions:
+        region_list.append(("%s" % (region.display_name),region.id))
+
+    session.close()
+    if region_list:
+        region_select = SelectInput(display_text='Select a Region',
+                                       name='region-select',
+                                       options=region_list,)
+    else:
+        region_select = None
 
 
+
+    context = {"region_select":region_select,"regions_length":len(region_list)}
+
+    return render(request, 'grace/home.html', context)
+
+@login_required
+def map(request):
 
     context = {}
 
-    return render(request, 'grace/home.html', context)
+    info = request.GET
+
+    region_id = info.get('region-select')
+    session = SessionMaker()
+
+    region = session.query(Region).get(region_id)
+    display_name = region.display_name
+
+    bbox = [float(x) for x in region.latlon_bbox.strip("(").strip(")").split(',')]
+    json.dumps(bbox)
+
+    geoserver = session.query(Geoserver).get(region.geoserver_id)
+    geoserver_url = geoserver.url
+    region_store = ''.join(display_name.split()).lower()
+
+
+    FILE_DIR = os.path.join(NETCDF_DIR,'')
+
+    region_dir = os.path.join(FILE_DIR+region_store,'')
+
+    geotiff_dir = os.path.join(region_dir+"geotiff")
+
+    sorted_files = sorted(os.listdir(geotiff_dir), key=lambda x: datetime.strptime(x, '%Y_%m_%d.tif'))
+    layers_length = len(sorted_files)
+    grace_layer_options = []
+
+    for file in sorted_files:
+        year = int(file[:-4].split('_')[0])
+        month = int(file[:-4].split('_')[1])
+        day = int(file[:-4].split('_')[2])
+        date_str = datetime(year,month,day)
+        date_str = date_str.strftime("%Y %B %d")
+        grace_layer_options.append([date_str,file[:-4]+"_"+region_store])
+
+    select_layer = SelectInput(display_text='Select a day',
+                               name='select_layer',
+                               multiple=False,
+                               options=grace_layer_options, )
+
+    csv_file = region_dir+region_store+".csv"
+    with open(csv_file, 'rb') as f:
+        reader = csv.reader(f)
+        csvlist = list(reader)
+
+    volume_time_series = []
+    volume = []
+    x_tracker = []
+    formatter_string = "%m/%d/%Y"
+    for item in csvlist:
+        mydate = datetime.strptime(item[0], formatter_string)
+        mydate = time.mktime(mydate.timetuple()) * 1000
+        volume_time_series.append([mydate, float(item[1])])
+        volume.append(float(item[1]))
+        x_tracker.append(mydate)
+
+    range = [round(min(volume), 2), round(max(volume), 2)]
+    range = json.dumps(range)
+
+    # Configure the time series Plot View
+    grace_plot = TimeSeries(
+        engine='highcharts',
+        title=display_name+ ' GRACE Data',
+        y_axis_title='Volume',
+        y_axis_units='cm',
+        series=[
+            {
+                'name': 'Change in Volume',
+                'color': '#0066ff',
+                'data': volume_time_series,
+            },
+            {
+                'name': 'Tracker',
+                'color': '#ff0000',
+                'data': [[min(x_tracker), -50], [min(x_tracker), 50]]
+            },
+        ],
+        width='100%',
+        height='300px'
+    )
+
+    wms_url = geoserver_url[:-5]+"wms"
+    color_bar = get_color_bar()
+    color_bar = json.dumps(color_bar)
+
+    if bbox[0] < 0 and bbox[2] < 0:
+        map_center = [(360+(int(bbox[0]))+(360+(int(bbox[2])))) / 2,(int(bbox[1])+int(bbox[3])) / 2]
+    else:
+        map_center = [(int(bbox[0]) + int(bbox[2])) / 2, (int(bbox[1]) + int(bbox[3])) / 2]
+    json.dumps(map_center)
+    json.dumps(x_tracker)
+
+    context = {"region_id":region_id,"display_name":display_name,"wms_url":wms_url,"select_layer":select_layer,"layers_length":layers_length,"grace_plot":grace_plot
+               ,'x_tracker':x_tracker,"color_bar":color_bar,"range":range,"bbox":bbox,"map_center":map_center}
+
+    return render(request, 'grace/map.html', context)
 
 @login_required
 def nepal_graph(request):
@@ -122,8 +225,8 @@ def nepal_graph(request):
     color_bar = get_color_bar()
     color_bar = json.dumps(color_bar)
 
-    context = {'grace_plot': grace_plot,'select_layer':select_layer,'layers_json':legend_json,'range':range,'slider_max':slider_max,'x_tracker':x_tracker,"color_bar":color_bar}
 
+    context = {'grace_plot': grace_plot,'select_layer':select_layer,'layers_json':legend_json,'range':range,'slider_max':slider_max,'x_tracker':x_tracker,"color_bar":color_bar}
     return render(request, 'grace/nepal_graph.html', context)
 
 @login_required
@@ -327,5 +430,7 @@ def manage_geoservers_table(request):
     session.close()
 
     return render(request, 'grace/manage_geoservers_table.html', context)
+
+
 
 

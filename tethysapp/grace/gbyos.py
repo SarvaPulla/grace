@@ -15,7 +15,7 @@ from grace import *
 
 from django.http import JsonResponse, HttpResponse, Http404
 
-def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBAL_NETCDF_DIR):
+def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBAL_NETCDF_DIR,display_name,geoserver_id):
 
     try:
         GLOBAL_NETCDF_DIR = os.path.join(GLOBAL_NETCDF_DIR, '')
@@ -61,17 +61,18 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Open netCDF file
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        print('Read GRACE netCDF file')
         f = netCDF4.Dataset(gbyos_grc_ncf, 'r')
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Get dimension sizes
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         IS_grc_lon = len(f.dimensions['lon'])
-
+        print(' - The number of longitudes is: ' + str(IS_grc_lon))
         IS_grc_lat = len(f.dimensions['lat'])
-
+        print(' - The number of latitudes is: ' + str(IS_grc_lat))
         IS_grc_time = len(f.dimensions['time'])
-
+        print(' - The number of time steps is: ' + str(IS_grc_time))
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Get values of dimension arrays
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -98,15 +99,16 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Open netCDF file
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        print('Read scale factors netCDF file')
         g = netCDF4.Dataset(gbyos_fct_ncf, 'r')
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Get dimension sizes
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         IS_fct_lon = len(g.dimensions['lon'])
-
+        print(' - The number of longitudes is: ' + str(IS_fct_lon))
         IS_fct_lat = len(g.dimensions['lat'])
-
+        print(' - The number of latitudes is: ' + str(IS_fct_lat))
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         # Get values of dimension arrays
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -116,27 +118,46 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
         # *******************************************************************************
         # Read polygon shapefile
         # *******************************************************************************
-
+        print('Read polygon shapefile')
         gbyos_pol_lay = fiona.open(gbyos_pol_shp, 'r')
         IS_pol_tot = len(gbyos_pol_lay)
-
+        print(' - The number of polygon features is: ' + str(IS_pol_tot))
         # *******************************************************************************
         # Create spatial index for the bounds of each polygon feature
         # *******************************************************************************
 
 
         index = rtree.index.Index()
+        shp_bounds = []
+
+        def explode(coords):
+            """Explode a GeoJSON geometry's coordinates object and yield coordinate tuples.
+            As long as the input is conforming, the type of the geometry doesn't matter."""
+            for e in coords:
+                if isinstance(e, (float, int, long)):
+                    yield coords
+                    break
+                else:
+                    for f in explode(e):
+                        yield f
+
+        def bbox(f):
+            x, y = zip(*list(explode(f['geometry']['coordinates'])))
+            return min(x), min(y), max(x), max(y)
+
         for gbyos_pol_fea in gbyos_pol_lay:
             gbyos_pol_fid = int(gbyos_pol_fea['id'])
             # the first argument of index.insert has to be 'int', not 'long' or 'str'
             gbyos_pol_shy = shapely.geometry.shape(gbyos_pol_fea['geometry'])
             index.insert(gbyos_pol_fid, gbyos_pol_shy.bounds)
+            shp_bounds.append(gbyos_pol_shy.bounds)
+            bbox_val = bbox(gbyos_pol_fea)
             # creates an index between the feature ID and the bounds of that feature
 
         # *******************************************************************************
         # Find GRACE grid cells that intersect with polygon
         # *******************************************************************************
-
+        print('Find GRACE grid cells that intersect with polygon')
         IS_dom_tot = 0
         IV_dom_lon = []
         IV_dom_lat = []
@@ -160,11 +181,11 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
                         IV_dom_lat.append(JS_grc_lat)
                         IS_dom_tot = IS_dom_tot + 1
 
-
+        print(' - The number of grid cells found is: ' + str(IS_dom_tot))
         # *******************************************************************************
         # Find long-term mean for each intersecting GRACE grid cell
         # *******************************************************************************
-
+        print('Find long-term mean for each intersecting GRACE grid cell')
         ZV_dom_avg = [0] * IS_dom_tot
         for JS_dom_tot in range(IS_dom_tot):
             JS_grc_lon = IV_dom_lon[JS_dom_tot]
@@ -178,6 +199,7 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
         # *******************************************************************************
         # Compute surface area of each grid cell
         # *******************************************************************************
+        print('Compute surface area of each grid cell')
 
         ZV_dom_sqm = [0] * IS_dom_tot
         for JS_dom_tot in range(IS_dom_tot):
@@ -190,7 +212,7 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
         # *******************************************************************************
         # Find number of NoData points in scale factors for shapefile and area
         # *******************************************************************************
-
+        print('Find number of NoData points in scale factors for shapefile and area')
         ZM_grc_scl = g.variables['scale_factor'][:, :]
         IS_dom_msk = 0
         ZS_sqm = 0
@@ -201,11 +223,12 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
                 IS_dom_msk = IS_dom_msk + 1
             else:
                 ZS_sqm = ZS_sqm + ZV_dom_sqm[JS_dom_tot]
-
+        print(' - The number of NoData points found is: ' + str(IS_dom_msk))
+        print(' - The area (m2) for the domain is: ' + str(ZS_sqm))
         # *******************************************************************************
         # Compute total terrestrial water storage anomaly timeseries
         # *******************************************************************************
-
+        print('Compute total terrestrial water storage anomaly timeseries')
         ZV_wsa = []
         for JS_grc_time in range(IS_grc_time):
             ZS_wsa = 0
@@ -230,6 +253,7 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
         # *******************************************************************************
         # Determine time strings
         # *******************************************************************************
+        print('Determine time strings')
         gbyos_dat_str = datetime.strptime('2002-01-01T00:00:00','%Y-%m-%dT%H:%M:%S')
 
         YV_grc_time = []
@@ -241,7 +265,7 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
         # *******************************************************************************
         # Write gbyos_wsa_csv
         # *******************************************************************************
-
+        print('Write gbyos_wsa_csv')
         with open(gbyos_wsa_csv, 'wb') as csvfile:
             # csvwriter = csv.writer(csvfile, dialect='excel', quotechar="'",           \
             #                       quoting=csv.QUOTE_NONNUMERIC)
@@ -254,12 +278,12 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
         # *******************************************************************************
         # Write gbyos_wsa_ncf
         # *******************************************************************************
-
+        print('Write gbyos_wsa_ncf')
         # -------------------------------------------------------------------------------
         # Create netCDF file
         # -------------------------------------------------------------------------------
 
-
+        print('- Create netCDF file')
         h = netCDF4.Dataset(gbyos_wsa_ncf, 'w', format="NETCDF3_CLASSIC")
 
         time = h.createDimension("time", None)
@@ -278,7 +302,7 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
         # -------------------------------------------------------------------------------
         # Metadata in netCDF global attributes
         # -------------------------------------------------------------------------------
-
+        print('- Populate global attributes')
 
         dt = datetime.utcnow()
         dt = dt.replace(microsecond=0)
@@ -301,7 +325,7 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
         # -------------------------------------------------------------------------------
         # Metadata in netCDF variable attributes
         # -------------------------------------------------------------------------------
-
+        print('- Copy existing variable attributes')
 
         if 'time' in f.variables:
             var = f.variables['time']
@@ -340,7 +364,7 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
             if 'grid_mapping_name' in var.ncattrs(): crs.grid_mapping_name = var.grid_mapping_name
             if 'semi_major_axis' in var.ncattrs(): crs.semi_major_axis = var.semi_major_axis
             if 'inverse_flattening' in var.ncattrs(): crs.inverse_flattening = var.inverse_flattening
-
+        print('- Modify CRS variable attributes')
         lwe_thickness.grid_mapping = 'crs'
         crs.grid_mapping_name = 'latitude_longitude'
         crs.semi_major_axis = '6378137'
@@ -350,7 +374,7 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
         # -------------------------------------------------------------------------------
         # Populate static data
         # -------------------------------------------------------------------------------
-
+        print('- Populate static data')
 
         lon[:] = ZV_grc_lon[:]
         lat[:] = ZV_grc_lat[:]
@@ -359,7 +383,7 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
         # -------------------------------------------------------------------------------
         # Populate dynamic data
         # -------------------------------------------------------------------------------
-
+        print('- Populate dynamic data')
 
         for JS_dom_tot in range(IS_dom_tot):
             JS_grc_lon = IV_dom_lon[JS_dom_tot]
@@ -380,7 +404,7 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
         # *******************************************************************************
         # Close netCDF files
         # *******************************************************************************
-
+        print('Close netCDF files')
         f.close()
         g.close()
         h.close()
@@ -393,11 +417,14 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
 
         create_geotiffs(output_dir, geotiff_output_dir)
         upload_tiff(geotiff_output_dir,region_name,url,"grace",uname,pwd)
-
+        session = SessionMaker()
+        region = Region(geoserver_id=geoserver_id,display_name=display_name, latlon_bbox=str(bbox_val))
+        session.add(region)
+        session.commit()
+        session.close()
         return JsonResponse({"success": "success"})
     except Exception as e:
-        print e
-        return JsonResponse({"error":"Error with the request"})
+        return JsonResponse({"error":e})
     finally:
         # Delete the temporary directory once the geojson string is created
         if temp_dir is not None:

@@ -51,6 +51,9 @@ class Grace(TethysAppBase):
                     UrlMap(name='manage-regions-table',
                            url='grace/manage-regions/table',
                            controller='grace.controllers.manage_regions_table'),
+                    UrlMap(name='delete-regions-ajax',
+                           url='grace/manage-regions/delete',
+                           controller='grace.ajax_controllers.region_delete'),
                     UrlMap(name='add-geoserver',
                            url='grace/add-geoserver',
                            controller='grace.controllers.add_geoserver'),
@@ -69,19 +72,25 @@ class Grace(TethysAppBase):
                     UrlMap(name='delete-geoserver-ajax',
                            url='grace/manage-geoservers/delete',
                            controller='grace.ajax_controllers.geoserver_delete'),
+                    UrlMap(name='map',
+                           url='grace/map',
+                           controller='grace.controllers.map'),
+                    UrlMap(name='plot-region',
+                           url='grace/plot-region',
+                           controller='grace.ajax_controllers.plot_region'),
 
         )
 
         return url_maps
 
-    #
-    # def persistent_stores(self):
-    #
-    #     stores = (PersistentStore(name='main_db',  # Name of the database/persistent store
-    #                               initializer='grace.init_stores.init_main_db',
-    #                               # Location of the persistent store initialization function. See init_stores.py
-    #                               spatial=False
-    #                               ),
-    #               )
-    #
-    #     return stores
+
+    def persistent_stores(self):
+
+        stores = (PersistentStore(name='main_db',  # Name of the database/persistent store
+                                  initializer='grace.init_stores.init_main_db',
+                                  # Location of the persistent store initialization function. See init_stores.py
+                                  spatial=False
+                                  ),
+                  )
+
+        return stores

@@ -280,13 +280,13 @@ def create_world_json():
             for elem in coordinates:
                 for coord in elem:
                     if coord[0] < 0.25:
-                        coord[0] = abs(coord[0])+180
+                        coord[0] = coord[0]+360
         if type == 'MultiPolygon':
             for polygon in coordinates:
                 for elem in polygon:
                     for coord in elem:
                         if coord[0] < 0.25:
-                            coord[0] = abs(coord[0])+180
+                            coord[0] = coord[0]+360
 
                             # features = [feature['geometry'] for feature in data['features']]
                             # for file in os.listdir(file_input_dir):
@@ -429,3 +429,48 @@ def get_color_bar():
     final_cbar = zip(cbar,scale,opacity)
 
     return final_cbar
+
+def get_pt_region(pt_coords,nc_file):
+
+    graph_json = {}
+    ts_plot = []
+
+    coords = pt_coords.split(',')
+    stn_lat = float(coords[1])
+    stn_lon = float(coords[0])
+
+    nc_fid = Dataset(nc_file, 'r')
+    nc_var = nc_fid.variables  # Get the netCDF variables
+    nc_var.keys()  # Getting variable keys
+
+    time = nc_var['time'][:]
+    start_date = '01/01/2002'
+    date_str = datetime.strptime(start_date, "%m/%d/%Y")  # Start Date string.
+    lat = nc_var['lat'][:]
+    lon = nc_var['lon'][:]
+
+    for timestep, v in enumerate(time):
+        current_time_step = nc_var['lwe_thickness'][timestep, :, :]  # Getting the index of the current timestep
+
+        end_date = date_str + timedelta(days=float(v))  # Actual human readable date of the timestep
+
+        data = nc_var['lwe_thickness'][timestep, :, :]
+
+        lon_idx = (np.abs(lon - stn_lon)).argmin()
+        lat_idx = (np.abs(lat - stn_lat)).argmin()
+
+        value = data[lat_idx, lon_idx]
+
+        time_stamp = calendar.timegm(end_date.utctimetuple()) * 1000
+
+        ts_plot.append([time_stamp, round(float(value), 3)])
+        ts_plot.sort()
+
+    graph_json["values"] = ts_plot
+    graph_json["point"] = [round(stn_lat, 2), round(stn_lon, 2)]
+    graph_json = json.dumps(graph_json)
+    print graph_json
+
+    return graph_json
+
+

@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, Float, String
+from sqlalchemy import Column, Integer, Float, String, ForeignKey
 from sqlalchemy.orm import sessionmaker
 from app import Grace
 
@@ -38,17 +38,15 @@ class Region(Base):
     # Table Columns
 
     id = Column(Integer, primary_key=True)
+    geoserver_id = Column(Integer, ForeignKey('geoserver.id'))
     display_name = Column(String)
     latlon_bbox = Column(String)
-    projection = Column(String)
-    wfs_url = Column(String)
 
 
-    def __init__(self, display_name, latlon_bbox, projection,wfs_url):
+    def __init__(self, geoserver_id,display_name, latlon_bbox):
         """
         Constructor for the table
         """
+        self.geoserver_id = geoserver_id
         self.display_name = display_name
         self.latlon_bbox = latlon_bbox
-        self.projection = projection
-        self.wfs_url = wfs_url

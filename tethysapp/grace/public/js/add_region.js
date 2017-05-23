@@ -86,9 +86,15 @@ var GRACE_ADD_REGION = (function() {
         for(var i=0;i < shapefiles.length;i++){
             data.append("shapefile",shapefiles[i]);
         }
+
+        addInfoMessage("Adding Region. Please wait...","message");
+        var submit_button = $("#submit-add-region");
+        var submit_button_html = submit_button.html();
+        submit_button.text('Submitting ...');
         var xhr = ajax_update_database_with_file("submit",data); //Submitting the data through the ajax function, see main.js for the helper function.
             xhr.done(function(return_data){ //Reset the form once the data is added successfully
                 if("success" in return_data){
+                    submit_button.html(submit_button_html);
                     reset_form(return_data);
                 }
             });

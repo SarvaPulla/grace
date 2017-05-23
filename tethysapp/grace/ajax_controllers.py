@@ -11,8 +11,40 @@ from sqlalchemy.exc import IntegrityError
 from model import *
 import requests, urlparse
 from gbyos import *
-GRACE_NETCDF_DIR = '/home/tethys/netcdf/'
-GLOBAL_NETCDF_DIR = '/home/tethys/netcdf/global/'
+GRACE_NETCDF_DIR = '/grace/'
+GLOBAL_NETCDF_DIR = '/grace/global/'
+
+def plot_region(request):
+    return_obj = {}
+    if request.is_ajax() and request.method == 'POST':
+        info = request.POST
+
+        region_id = info.get('region-info')
+        pt_coords = request.POST['point-lat-lon']
+
+        session = SessionMaker()
+
+        region = session.query(Region).get(region_id)
+        display_name = region.display_name
+        region_store = ''.join(display_name.split()).lower()
+
+        FILE_DIR = os.path.join(GRACE_NETCDF_DIR, '')
+
+        region_dir = os.path.join(FILE_DIR + region_store, '')
+
+        nc_file = os.path.join(region_dir+region_store+".nc")
+        print nc_file
+
+        if pt_coords:
+            graph = get_pt_region(pt_coords,nc_file)
+            graph = json.loads(graph)
+            return_obj["values"] = graph["values"]
+            return_obj["location"] = graph["point"]
+
+        return_obj["success"] = "success"
+
+
+    return JsonResponse(return_obj)
 
 
 def get_plot(request):
@@ -42,8 +74,8 @@ def get_plot_global(request):
     if request.is_ajax() and request.method == 'POST':
         # Get the point/polygon/shapefile coordinates along with the selected variable
         pt_coords = request.POST['point-lat-lon']
-        poly_coords = request.POST['poly-lat-lon']
-        shp_bounds = request.POST['shp-lat-lon']
+        # poly_coords = request.POST['poly-lat-lon']
+        # shp_bounds = request.POST['shp-lat-lon']
 
         if pt_coords:
             graph = get_global_plot(pt_coords)
@@ -79,50 +111,7 @@ def region_add(request):
 
         geoserver = session.query(Geoserver).get(geoserver_id)
         url,uname,pwd = geoserver.url,geoserver.username,geoserver.password
-        process_shapefile(shapefile, url, uname, pwd, region_store, GRACE_NETCDF_DIR, GLOBAL_NETCDF_DIR)
-        spatial_data_engine = GeoServerSpatialDatasetEngine(endpoint=url,username=uname,password=pwd)
-
-        #Check if workspace exists
-        ws_name = "grace_subset_regions"
-        geoserver_uri = 'http://www.tethys.byu.edu/apps/grace'
-        response = spatial_data_engine.list_workspaces()
-
-        if response['success']:
-            workspaces = response['result']
-
-            if ws_name not in workspaces:
-                spatial_data_engine.create_workspace(workspace_id=ws_name,uri=geoserver_uri)
-
-        store_id = ws_name + ':' + region_store
-        spatial_data_engine.create_shapefile_resource(store_id=store_id,shapefile_upload=shapefile,overwrite=True,debug=True)
-
-        store_info = spatial_data_engine.get_store(store_id)
-        store_info_url = '{0}workspaces/{1}/datastores/{2}/featuretypes.json'.format(url,ws_name,region_store)
-
-        r = requests.get(store_info_url,auth=(uname,pwd))
-
-        if r.status_code != 200:
-            response = {"Error:Geoserver seems to be down!"}
-        else:
-            feature_type_json = r.json()
-            print feature_type_json
-            layer_name =  feature_type_json["featureTypes"]["featureType"][0]["name"]
-
-        layer_info = spatial_data_engine.get_layer(ws_name+":"+layer_name)
-
-        kmlurl = layer_info['result']['wms']['kml']
-        parsedkml = urlparse.urlparse(kmlurl)
-        bbox = urlparse.parse_qs(parsedkml.query)['bbox'][0]
-        projection = urlparse.parse_qs(parsedkml.query)['srs'][0]
-        geoserver_wfs_url = url[:-5]
-
-        wfs_url = '{}{}/ows?service=WFS&version=1.0.0&request=GetFeature&typeNames={}:{}&outputFormat=json&format_options=callback:getJson'.format(geoserver_wfs_url,ws_name,ws_name,layer_name)
-
-
-        region = Region(display_name=region_name, latlon_bbox=bbox, projection=projection, wfs_url=wfs_url)
-        session.add(region)
-        session.commit()
-        session.close()
+        process_shapefile(shapefile, url, uname, pwd, region_store, GRACE_NETCDF_DIR, GLOBAL_NETCDF_DIR,region_name,geoserver_id)
 
         response = {"success":"success"}
 
@@ -234,3 +223,57 @@ def geoserver_delete(request):
         return JsonResponse({'success': "Geoserver sucessfully deleted!"})
     return JsonResponse({'error': "A problem with your request exists."})
 
+@user_passes_test(user_permission_test)
+def region_delete(request):
+    """
+    Controller for deleting a region.
+    """
+    if request.is_ajax() and request.method == 'POST':
+        # get/check information from AJAX request
+        post_info = request.POST
+        region_id = post_info.get('region_id')
+
+        # initialize session
+        session = SessionMaker()
+        try:
+            # delete region
+            try:
+                region = session.query(Region).get(region_id)
+            except ObjectDeletedError:
+                session.close()
+                return JsonResponse({'error': "The geoserver to delete does not exist."})
+            display_name = region.display_name
+            region_store = ''.join(display_name.split()).lower()
+            geoserver_id = region.geoserver_id
+            geoserver = session.query(Geoserver).get(geoserver_id)
+            geoserver_url = geoserver.url
+            uname = geoserver.username
+            pwd = geoserver.password
+
+            spatial_dataset_engine = GeoServerSpatialDatasetEngine(endpoint=geoserver_url, username=uname,
+                                                                   password=pwd)
+
+            stores = spatial_dataset_engine.list_stores()
+
+            for store in stores['result']:
+                if store.endswith(region_store):
+                    spatial_dataset_engine.delete_store(store,purge=True,recurse=True)
+
+            FILE_DIR = os.path.join(GRACE_NETCDF_DIR, '')
+
+            region_dir = os.path.join(FILE_DIR + region_store, '')
+
+            session.delete(region)
+            session.commit()
+            session.close()
+        except IntegrityError:
+            session.close()
+            return JsonResponse(
+                {'error': "This geoserver is connected with a watershed! Must remove connection to delete."})
+        finally:
+        # Delete the temporary directory once the geojson string is created
+            if region_dir is not None:
+                if os.path.exists(region_dir):
+                    shutil.rmtree(region_dir)
+        return JsonResponse({'success': "Region sucessfully deleted!"})
+    return JsonResponse({'error': "A problem with your request exists."})

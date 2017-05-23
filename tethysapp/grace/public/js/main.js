@@ -153,6 +153,7 @@ function ajax_update_database_with_file(ajax_url, ajax_data,div_id) {
     if (ajax_url.substr(-1) !== "/") {
         ajax_url = ajax_url.concat("/");
     }
+
     //update database
     var xhr = jQuery.ajax({
         url: ajax_url,
