@@ -424,7 +424,12 @@ def process_shapefile(shapefile,url,uname,pwd,region_name,GRACE_NETCDF_DIR,GLOBA
         session.close()
         return JsonResponse({"success": "success"})
     except Exception as e:
+        # Delete the temporary directory once the geojson string is created
+        if temp_dir is not None:
+            if os.path.exists(temp_dir):
+                shutil.rmtree(temp_dir)
         return JsonResponse({"error":e})
+
     finally:
         # Delete the temporary directory once the geojson string is created
         if temp_dir is not None:

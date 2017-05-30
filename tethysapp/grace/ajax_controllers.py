@@ -11,8 +11,8 @@ from sqlalchemy.exc import IntegrityError
 from model import *
 import requests, urlparse
 from gbyos import *
-GRACE_NETCDF_DIR = '/grace/'
-GLOBAL_NETCDF_DIR = '/grace/global/'
+GRACE_NETCDF_DIR = '/home/tethys/netcdf/'
+GLOBAL_NETCDF_DIR = '/home/tethys/netcdf/global/'
 
 def plot_region(request):
     return_obj = {}

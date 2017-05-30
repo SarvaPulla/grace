@@ -11,28 +11,28 @@
  *****************************************************************************/
 
 var GRACE_ADD_REGION = (function() {
-	// Wrap the library in a package function
-	"use strict"; // And enable strict mode for this library
+    // Wrap the library in a package function
+    "use strict"; // And enable strict mode for this library
 
-	/************************************************************************
- 	*                      MODULE LEVEL / GLOBAL VARIABLES
- 	*************************************************************************/
- 	var $region_input,
+    /************************************************************************
+     *                      MODULE LEVEL / GLOBAL VARIABLES
+     *************************************************************************/
+    var $region_input,
         $shp_input,
         $geoserver_select,
         public_interface;				// Object returned by the module
 
 
 
-	/************************************************************************
- 	*                    PRIVATE FUNCTION DECLARATIONS
- 	*************************************************************************/
+    /************************************************************************
+     *                    PRIVATE FUNCTION DECLARATIONS
+     *************************************************************************/
 
     var add_region,init_jquery,reset_alert,reset_form;
 
- 	/************************************************************************
- 	*                    PRIVATE FUNCTION IMPLEMENTATIONS
- 	*************************************************************************/
+    /************************************************************************
+     *                    PRIVATE FUNCTION IMPLEMENTATIONS
+     *************************************************************************/
 
     init_jquery = function(){
         $shp_input = $("#shp-upload-input");
@@ -60,28 +60,40 @@ var GRACE_ADD_REGION = (function() {
         }
     };
 
+
+
+
+
     add_region = function(){
         reset_alert(); //Reset the alerts
         var region_name = $region_input.val();
         var geoserver = $geoserver_select.val();
         var shapefiles = $("#shp-upload-input")[0].files;
 
+        if (/[^a-zA-Z0-9 ]/g.test(region_name) == true){
+            addErrorMessage("Region Name cannot have special characters. Please use numbers and letters!");
+            return false;
+        }else{
+            reset_alert();
+        }
         if(region_name == ""){
-                addErrorMessage("Region Name cannot be empty!");
-                return false;
-            }else{
-                reset_alert();
-            }
+            addErrorMessage("Region Name cannot be empty!");
+            return false;
+        }else{
+            reset_alert();
+        }
         if($shp_input.val() == ""){
-                addErrorMessage("Region Shape File cannot be empty!");
-                return false;
-            }else{
-                reset_alert();
-            }
+            addErrorMessage("Region Shape File cannot be empty!");
+            return false;
+        }else{
+            reset_alert();
+        }
+
+
 
         //Preparing data to be submitted via AJAX POST request
-            var data = new FormData();
-            data.append("region_name",region_name);
+        var data = new FormData();
+        data.append("region_name",region_name);
         data.append("geoserver",geoserver);
         for(var i=0;i < shapefiles.length;i++){
             data.append("shapefile",shapefiles[i]);
@@ -92,42 +104,42 @@ var GRACE_ADD_REGION = (function() {
         var submit_button_html = submit_button.html();
         submit_button.text('Submitting ...');
         var xhr = ajax_update_database_with_file("submit",data); //Submitting the data through the ajax function, see main.js for the helper function.
-            xhr.done(function(return_data){ //Reset the form once the data is added successfully
-                if("success" in return_data){
-                    submit_button.html(submit_button_html);
-                    reset_form(return_data);
-                }
-            });
+        xhr.done(function(return_data){ //Reset the form once the data is added successfully
+            if("success" in return_data){
+                submit_button.html(submit_button_html);
+                reset_form(return_data);
+            }
+        });
 
     };
     $("#submit-add-region").click(add_region);
 
-	/************************************************************************
- 	*                        DEFINE PUBLIC INTERFACE
- 	*************************************************************************/
-	/*
-	 * Library object that contains public facing functions of the package.
-	 * This is the object that is returned by the library wrapper function.
-	 * See below.
-	 * NOTE: The functions in the public interface have access to the private
-	 * functions of the library because of JavaScript function scope.
-	 */
-	public_interface = {
+    /************************************************************************
+     *                        DEFINE PUBLIC INTERFACE
+     *************************************************************************/
+    /*
+     * Library object that contains public facing functions of the package.
+     * This is the object that is returned by the library wrapper function.
+     * See below.
+     * NOTE: The functions in the public interface have access to the private
+     * functions of the library because of JavaScript function scope.
+     */
+    public_interface = {
 
-	};
+    };
 
-	/************************************************************************
- 	*                  INITIALIZATION / CONSTRUCTOR
- 	*************************************************************************/
+    /************************************************************************
+     *                  INITIALIZATION / CONSTRUCTOR
+     *************************************************************************/
 
-	// Initialization: jQuery function that gets called when
-	// the DOM tree finishes loading
-	$(function() {
-	    init_jquery();
+    // Initialization: jQuery function that gets called when
+    // the DOM tree finishes loading
+    $(function() {
+        init_jquery();
 
-	});
+    });
 
-	return public_interface;
+    return public_interface;
 
 }()); // End of package wrapper
 // NOTE: that the call operator (open-closed parenthesis) is used to invoke the library wrapper

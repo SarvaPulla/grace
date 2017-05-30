@@ -126,13 +126,15 @@ def user_permission_test(user):
 #             sys.exit()
 #             return False
 
-def create_global_tiff(var_name,xsize,ysize,GeoT,NDV):
+def create_global_tiff(var_name):
 
     # NewFile = '/home/tethys/geotiff_global/'+var_name+'.tif'
+    xsize, ysize, GeoT, NDV = get_netcdf_info_global('/home/tethys/netcdf/global/GRCTellus.JPL.200204_201608.GLO.RL05M_1.MSCNv02CRIv02.nc',var_name)
+
 
     start_date = '01/01/2002'
 
-    nc_fid = Dataset('/home/tethys/netcdf/grace.nc', 'r')  # Reading the netcdf file
+    nc_fid = Dataset('/home/tethys/netcdf/global/GRCTellus.JPL.200204_201608.GLO.RL05M_1.MSCNv02CRIv02.nc', 'r')  # Reading the netcdf file
     nc_var = nc_fid.variables #Get the netCDF variables
     nc_var.keys() #Getting variable keys
 
@@ -152,7 +154,7 @@ def create_global_tiff(var_name,xsize,ysize,GeoT,NDV):
         data = data[::-1, :]
         driver = gdal.GetDriverByName('GTiff')
         DataSet = driver.Create('/home/tethys/geotiff_global/'+ts_file_name+'.tif',xsize,ysize,1, gdal.GDT_Float32)
-        DataSet.SetGeoTransform(GeoT)
+        DataSet.SetGeoTransform([0.0, 0.5, 0.0, 90.0, 0.0, -0.5])
         srs=osr.SpatialReference()
         srs.ImportFromEPSG(4326)
         DataSet.SetProjection(srs.ExportToWkt())
