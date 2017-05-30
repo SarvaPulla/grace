@@ -11,7 +11,7 @@ import json,time
 from .app import Grace
 from model import *
 
-NETCDF_DIR = '/home/tethys/netcdf/'
+NETCDF_DIR = '/grace/'
 
 @login_required()
 def home(request):
