@@ -51,7 +51,6 @@
 <li class="title">App Navigation</li>
 <li {% if request.path == '/apps/grace/' %} class="active" {% endif %}><a href="{% url 'grace:home' %}">Home</a></li>
 <li {% if 'global-map' in request.path  %} class="active" {% endif %}><a href="{% url 'grace:global-map' %}">Global Map</a></li>
-<!--<li {% if 'nepal-graph' in request.path  %} class="active" {% endif %}><a href="{% url 'grace:nepal-graph' %}">Nepal Graph</a></li>-->
 
 <br>
 {% gizmo select_input select_layer %}
