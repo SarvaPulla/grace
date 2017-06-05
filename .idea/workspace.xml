@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="da222448-5a55-4b18-9327-c69cd4160fc3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/templates/grace/global_map.html" afterPath="$PROJECT_DIR$/tethysapp/grace/templates/grace/global_map.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/ajax_controllers.py" afterPath="$PROJECT_DIR$/tethysapp/grace/ajax_controllers.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/app.py" afterPath="$PROJECT_DIR$/tethysapp/grace/app.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/controllers.py" afterPath="$PROJECT_DIR$/tethysapp/grace/controllers.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/public/js/global_map.js" afterPath="$PROJECT_DIR$/tethysapp/grace/public/js/global_map.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/public/js/map.js" afterPath="$PROJECT_DIR$/tethysapp/grace/public/js/map.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/templates/grace/home.html" afterPath="$PROJECT_DIR$/tethysapp/grace/templates/grace/home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tethysapp/grace/utilities.py" afterPath="$PROJECT_DIR$/tethysapp/grace/utilities.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,8 +24,8 @@
       <file leaf-file-name="gbyos.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tethysapp/grace/gbyos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1738">
-              <caret line="427" column="32" lean-forward="false" selection-start-line="427" selection-start-column="32" selection-end-line="427" selection-end-column="32" />
+            <state relative-caret-position="604">
+              <caret line="422" column="24" lean-forward="false" selection-start-line="422" selection-start-column="24" selection-end-line="422" selection-end-column="24" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -29,22 +36,10 @@
       <file leaf-file-name="controllers.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tethysapp/grace/controllers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1134">
-              <caret line="63" column="42" lean-forward="true" selection-start-line="63" selection-start-column="42" selection-end-line="63" selection-end-column="42" />
+            <state relative-caret-position="234">
+              <caret line="13" column="20" lean-forward="false" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ajax_controllers.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tethysapp/grace/ajax_controllers.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-              <folding>
-                <element signature="e#0#59#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -53,18 +48,64 @@
       <file leaf-file-name="app.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tethysapp/grace/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="31" column="70" lean-forward="false" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
+            <state relative-caret-position="-62">
+              <caret line="60" column="60" lean-forward="true" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="manage_regions.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/manage_regions.js">
+      <file leaf-file-name="api.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tethysapp/grace/api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
-              <caret line="44" column="30" lean-forward="false" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
+            <state relative-caret-position="234">
+              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utilities.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tethysapp/grace/utilities.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="428">
+              <caret line="523" column="0" lean-forward="false" selection-start-line="523" selection-start-column="0" selection-end-line="523" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ajax_controllers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tethysapp/grace/ajax_controllers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2448">
+              <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#59#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="grace.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tethysapp/grace/grace.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1872">
+              <caret line="116" column="0" lean-forward="true" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="home.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/home.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -73,65 +114,41 @@
       <file leaf-file-name="map.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6822">
-              <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
+            <state relative-caret-position="-5345">
+              <caret line="242" column="0" lean-forward="true" selection-start-line="242" selection-start-column="0" selection-end-line="242" selection-end-column="0" />
               <folding>
-                <marker date="1495559851324" expanded="true" signature="17079:17500" ph="..." />
-                <marker date="1495559851324" expanded="true" signature="17091:17466" ph="..." />
-                <marker date="1495559851324" expanded="true" signature="17129:17443" ph="..." />
-                <marker date="1495559851324" expanded="true" signature="17147:17421" ph="..." />
-                <marker date="1495559851324" expanded="true" signature="17153:17392" ph="..." />
-                <marker date="1495559851324" expanded="true" signature="17181:17375" ph="..." />
-                <marker date="1495559851324" expanded="true" signature="17202:17346" ph="..." />
-                <marker date="1495559851324" expanded="true" signature="18077:18499" ph="..." />
-                <marker date="1495559851324" expanded="true" signature="18089:18465" ph="..." />
-                <marker date="1495559851324" expanded="true" signature="18127:18442" ph="..." />
-                <marker date="1495559851324" expanded="true" signature="18145:18420" ph="..." />
-                <marker date="1495559851324" expanded="true" signature="18151:18391" ph="..." />
-                <marker date="1495559851324" expanded="true" signature="18179:18374" ph="..." />
-                <marker date="1495559851324" expanded="true" signature="18200:18345" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="17079:17500" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="17091:17466" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="17129:17443" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="17147:17421" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="17153:17392" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="17181:17375" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="17202:17346" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="18079:18501" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="18091:18467" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="18129:18444" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="18147:18422" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="18153:18393" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="18181:18376" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="18202:18347" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="21198:22071" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="21210:22034" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="21248:22008" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="21266:21983" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="21272:21951" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="21303:21931" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="21327:21420" ph="..." />
+                <marker date="1496355521839" expanded="true" signature="21327:21899" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add_region.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/add_region.js">
+      <file leaf-file-name="manage_regions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/manage_regions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1872">
-              <caret line="104" column="45" lean-forward="false" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="global_map.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/global_map.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="map.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/map.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="20" column="24" lean-forward="false" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" column="128" lean-forward="false" selection-start-line="17" selection-start-column="128" selection-end-line="17" selection-end-column="128" />
+            <state relative-caret-position="631">
+              <caret line="44" column="30" lean-forward="false" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -142,9 +159,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -171,6 +188,8 @@
       <find>info</find>
       <find>infomessage</find>
       <find>global</find>
+      <find>get_plot</find>
+      <find>get_pt_plot</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -189,26 +208,28 @@
         <option value="$PROJECT_DIR$/tethysapp/grace/templates/grace/add_region.html" />
         <option value="$PROJECT_DIR$/tethysapp/grace/templates/grace/manage_regions.html" />
         <option value="$PROJECT_DIR$/tethysapp/grace/public/js/manage_regions.js" />
-        <option value="$PROJECT_DIR$/tethysapp/grace/public/js/global_map.js" />
         <option value="$PROJECT_DIR$/tethysapp/grace/public/js/nepal_graph.js" />
         <option value="$PROJECT_DIR$/tethysapp/grace/init_stores.py" />
-        <option value="$PROJECT_DIR$/tethysapp/grace/templates/grace/home.html" />
         <option value="$PROJECT_DIR$/tethysapp/grace/model.py" />
-        <option value="$PROJECT_DIR$/tethysapp/grace/public/js/map.js" />
         <option value="$PROJECT_DIR$/tethysapp/grace/templates/grace/manage_regions_table.html" />
         <option value="$PROJECT_DIR$/tethysapp/grace/grace.py" />
         <option value="$PROJECT_DIR$/tethysapp/grace/public/js/main.js" />
-        <option value="$PROJECT_DIR$/tethysapp/grace/utilities.py" />
         <option value="$PROJECT_DIR$/tethysapp/grace/gbyos.py" />
         <option value="$PROJECT_DIR$/tethysapp/grace/templates/grace/manage_geoservers_table.html" />
         <option value="$PROJECT_DIR$/tethysapp/grace/templates/grace/map.html" />
         <option value="$PROJECT_DIR$/tethysapp/grace/public/js/add_region.js" />
-        <option value="$PROJECT_DIR$/tethysapp/grace/app.py" />
-        <option value="$PROJECT_DIR$/tethysapp/grace/controllers.py" />
-        <option value="$PROJECT_DIR$/tethysapp/grace/ajax_controllers.py" />
         <option value="$PROJECT_DIR$/tethysapp/grace/templates/grace/nepal_graph.html" />
         <option value="$PROJECT_DIR$/tethysapp/grace/templates/grace/base.html" />
         <option value="$PROJECT_DIR$/tethysapp/grace/templates/grace/global_map.html" />
+        <option value="$PROJECT_DIR$/tethysapp/grace/templates/grace/home.html" />
+        <option value="$PROJECT_DIR$/tethysapp/grace/public/js/global_map.js" />
+        <option value="$PROJECT_DIR$/tethysapp/grace/public/js/map.js" />
+        <option value="$PROJECT_DIR$/tethysapp/grace/app.py" />
+        <option value="$PROJECT_DIR$/tethysapp/grace/public/api.py" />
+        <option value="$PROJECT_DIR$/tethysapp/grace/utilities.py" />
+        <option value="$PROJECT_DIR$/tethysapp/grace/controllers.py" />
+        <option value="$PROJECT_DIR$/tethysapp/grace/ajax_controllers.py" />
+        <option value="$PROJECT_DIR$/tethysapp/grace/api.py" />
       </list>
     </option>
   </component>
@@ -220,9 +241,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="24" />
+    <option name="y" value="-4" />
     <option name="width" value="1535" />
-    <option name="height" value="772" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -422,7 +443,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1535" height="772" extended-state="6" />
+    <frame x="65" y="-4" width="1535" height="800" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2495114" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -459,20 +480,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/nepal_graph.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4266">
-          <caret line="237" column="39" lean-forward="false" selection-start-line="237" selection-start-column="39" selection-end-line="237" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/tethys/src/tethys_apps/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3636">
@@ -484,24 +491,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="3" column="11" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/nepal_graph.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="31" column="56" lean-forward="false" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/nepal_graph.html" />
     <entry file="file://$PROJECT_DIR$/tethysapp/grace/grace.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="10" column="10" lean-forward="false" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#27#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -509,9 +506,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="31" lean-forward="false" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -556,20 +550,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/nepal_graph.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="31" column="56" lean-forward="false" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/nepal_graph.html" />
     <entry file="file://$PROJECT_DIR$/tethysapp/grace/grace.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="972">
           <caret line="64" column="46" lean-forward="true" selection-start-line="64" selection-start-column="46" selection-end-line="64" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#27#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -577,9 +562,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="14" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -647,13 +629,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/manage_geoservers.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/manage_regions.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
@@ -665,13 +640,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
           <caret line="27" column="12" lean-forward="true" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="11" lean-forward="true" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -689,13 +657,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/global_map.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6228">
-          <caret line="352" column="0" lean-forward="false" selection-start-line="352" selection-start-column="0" selection-end-line="415" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/manage_geoservers.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="329">
@@ -707,7 +668,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="545">
           <caret line="49" column="40" lean-forward="false" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -715,9 +675,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -725,19 +682,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4302">
           <caret line="239" column="8" lean-forward="false" selection-start-line="239" selection-start-column="8" selection-end-line="240" selection-end-column="45" />
-          <folding>
-            <marker date="1495564761273" expanded="true" signature="2841:2848" ph="×" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/grace.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2376">
-          <caret line="144" column="41" lean-forward="false" selection-start-line="144" selection-start-column="41" selection-end-line="144" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#27#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -745,17 +689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="9" column="56" lean-forward="false" selection-start-line="9" selection-start-column="56" selection-end-line="9" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/utilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-486">
-          <caret line="156" column="62" lean-forward="false" selection-start-line="156" selection-start-column="62" selection-end-line="156" selection-end-column="62" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -763,46 +696,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="25" column="39" lean-forward="false" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/map.js">
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/nepal_graph.html" />
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/manage_geoservers.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6822">
-          <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
+        <state relative-caret-position="126">
+          <caret line="7" column="101" lean-forward="true" selection-start-line="7" selection-start-column="101" selection-end-line="7" selection-end-column="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/global_map.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="17" lean-forward="false" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/add_region.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="10" column="26" lean-forward="false" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
           <folding>
-            <marker date="1495559851324" expanded="true" signature="17079:17500" ph="..." />
-            <marker date="1495559851324" expanded="true" signature="17091:17466" ph="..." />
-            <marker date="1495559851324" expanded="true" signature="17129:17443" ph="..." />
-            <marker date="1495559851324" expanded="true" signature="17147:17421" ph="..." />
-            <marker date="1495559851324" expanded="true" signature="17153:17392" ph="..." />
-            <marker date="1495559851324" expanded="true" signature="17181:17375" ph="..." />
-            <marker date="1495559851324" expanded="true" signature="17202:17346" ph="..." />
-            <marker date="1495559851324" expanded="true" signature="18077:18499" ph="..." />
-            <marker date="1495559851324" expanded="true" signature="18089:18465" ph="..." />
-            <marker date="1495559851324" expanded="true" signature="18127:18442" ph="..." />
-            <marker date="1495559851324" expanded="true" signature="18145:18420" ph="..." />
-            <marker date="1495559851324" expanded="true" signature="18151:18391" ph="..." />
-            <marker date="1495559851324" expanded="true" signature="18179:18374" ph="..." />
-            <marker date="1495559851324" expanded="true" signature="18200:18345" ph="..." />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/nepal_graph.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1044">
-          <caret line="58" column="8" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="137" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/map.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="20" column="24" lean-forward="false" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -814,28 +732,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/ajax_controllers.py">
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/global_map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+        <state relative-caret-position="7596">
+          <caret line="428" column="75" lean-forward="false" selection-start-line="428" selection-start-column="75" selection-end-line="428" selection-end-column="75" />
           <folding>
-            <element signature="e#0#59#0" expanded="true" />
+            <marker date="1496250435020" expanded="true" signature="13091:13512" ph="..." />
+            <marker date="1496250435020" expanded="true" signature="13103:13478" ph="..." />
+            <marker date="1496250435020" expanded="true" signature="13141:13455" ph="..." />
+            <marker date="1496250435020" expanded="true" signature="13159:13433" ph="..." />
+            <marker date="1496250435020" expanded="true" signature="13165:13404" ph="..." />
+            <marker date="1496250435020" expanded="true" signature="13193:13387" ph="..." />
+            <marker date="1496250435020" expanded="true" signature="13214:13358" ph="..." />
+            <marker date="1496250435020" expanded="true" signature="14130:14552" ph="..." />
+            <marker date="1496250435020" expanded="true" signature="14142:14518" ph="..." />
+            <marker date="1496250435020" expanded="true" signature="14180:14495" ph="..." />
+            <marker date="1496250435020" expanded="true" signature="14198:14473" ph="..." />
+            <marker date="1496250435020" expanded="true" signature="14204:14444" ph="..." />
+            <marker date="1496250435020" expanded="true" signature="14232:14427" ph="..." />
+            <marker date="1496250435020" expanded="true" signature="14253:14398" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/app.py">
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/map.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="31" column="70" lean-forward="false" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
+        <state relative-caret-position="396">
+          <caret line="22" column="4" lean-forward="false" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="46" lean-forward="true" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tethysapp/grace/gbyos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1738">
-          <caret line="427" column="32" lean-forward="false" selection-start-line="427" selection-start-column="32" selection-end-line="427" selection-end-column="32" />
+        <state relative-caret-position="604">
+          <caret line="422" column="24" lean-forward="false" selection-start-line="422" selection-start-column="24" selection-end-line="422" selection-end-column="24" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
@@ -844,8 +783,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tethysapp/grace/controllers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1134">
-          <caret line="63" column="42" lean-forward="true" selection-start-line="63" selection-start-column="42" selection-end-line="63" selection-end-column="42" />
+        <state relative-caret-position="234">
+          <caret line="13" column="20" lean-forward="false" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
@@ -854,26 +793,93 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/manage_regions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
+        <state relative-caret-position="631">
           <caret line="44" column="30" lean-forward="false" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/add_region.js">
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/public/js/map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1872">
-          <caret line="104" column="45" lean-forward="false" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
+        <state relative-caret-position="-5345">
+          <caret line="242" column="0" lean-forward="true" selection-start-line="242" selection-start-column="0" selection-end-line="242" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <marker date="1496355521839" expanded="true" signature="17079:17500" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="17091:17466" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="17129:17443" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="17147:17421" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="17153:17392" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="17181:17375" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="17202:17346" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="18079:18501" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="18091:18467" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="18129:18444" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="18147:18422" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="18153:18393" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="18181:18376" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="18202:18347" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="21198:22071" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="21210:22034" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="21248:22008" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="21266:21983" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="21272:21951" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="21303:21931" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="21327:21420" ph="..." />
+            <marker date="1496355521839" expanded="true" signature="21327:21899" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/global_map.html">
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="53" column="0" lean-forward="true" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+        <state relative-caret-position="-62">
+          <caret line="60" column="60" lean-forward="true" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/utilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="523" column="0" lean-forward="false" selection-start-line="523" selection-start-column="0" selection-end-line="523" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/ajax_controllers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2448">
+          <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/grace.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1872">
+          <caret line="116" column="0" lean-forward="true" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tethysapp/grace/templates/grace/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
           <folding />
         </state>
       </provider>

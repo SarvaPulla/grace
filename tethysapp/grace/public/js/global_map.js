@@ -427,7 +427,6 @@ var LIBRARY_OBJECT = (function() {
                 var date_text = $("#select_layer option")[ui.value].text;
                 $( "#grace-date" ).val(date_text); //Get the value from the slider
                 var date_value = $("#select_layer option")[ui.value].value;
-
                 update_wms(date_value);
             }
         });
@@ -555,6 +554,7 @@ var LIBRARY_OBJECT = (function() {
             if (sliderVal===slider_max - 1) sliderVal=0;
         }, animationDelay);
     };
+
     $(".btn-run").on("click", animate);
     //Set the slider value to the current value to start the animation at the );
     $(".btn-stop").on("click", function() {

@@ -3,7 +3,7 @@
 
 {% block app_content %}
     <h1>Welcome</h1>
-    <p>This app illustrates how to perform basic Tethys functions using GRACE groundwater data of groundwater volume changes over time since 2002.</p>
+<p>This app produces basic maps and timeseries using data from the <a href="https://www.jpl.nasa.gov/missions/gravity-recovery-and-climate-experiment-grace/" target="_blank">GRACE mission</a></p>
 {% if regions_length > 0 %}
     <form action="{% url 'grace:map' %}" method="get">
     <p>Select a region from the dropdown below to view timeseries and an interactive map.</p>

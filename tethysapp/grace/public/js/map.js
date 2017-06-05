@@ -502,6 +502,8 @@ var GRACE_MAP = (function() {
 
         map.addLayer(wms_layer);
 
+
+
     };
 
     update_wms = function(date_str){
@@ -597,6 +599,42 @@ var GRACE_MAP = (function() {
 
     $("#btn-get-plot").on('click',get_plot);
 
+    // add_test = function(){
+    //
+    //
+    //
+    //     var layer_name = 'lis:1981-01-14';
+    //     var sld_string = '<StyledLayerDescriptor version="1.0.0"><NamedLayer><Name>'+layer_name+'</Name><UserStyle><FeatureTypeStyle><Rule>\
+    //     <RasterSymbolizer> \
+    //     <ColorMap>\
+    //     <ColorMapEntry color="#000000" quantity="-0.2" label="nodata" opacity="0.0" />\
+    //         <ColorMapEntry color="#1427ba" quantity="1.2" label="nodata" opacity="0.0" />\
+    //         <ColorMapEntry color="#00a1ff" quantity="2.6" label="nodata" opacity="0.0" />\
+    //         <ColorMapEntry color="#00ffe1" quantity="4.1" label="nodata" opacity="0.0" />\
+    //         <ColorMapEntry color="#00ff48" quantity="5.5" label="nodata" opacity="0.0" />\
+    //         <ColorMapEntry color="#ff0800" quantity="6.9" label="nodata" opacity="0.0" /></ColorMap>\
+    //     </RasterSymbolizer>\
+    //     </Rule>\
+    //     </FeatureTypeStyle>\
+    //     </UserStyle>\
+    //     </NamedLayer>\
+    //     </StyledLayerDescriptor>';
+    //
+    //     var lis_source = new ol.source.ImageWMS({
+    //         url: 'http://127.0.0.1:8181/geoserver/wms/',
+    //         params: {'LAYERS':layer_name,'SLD_BODY':sld_string},
+    //         serverType: 'geoserver',
+    //         crossOrigin: 'Anonymous'
+    //     });
+    //
+    //     var lis_layer = new ol.layer.Image({
+    //         source: lis_source
+    //     });
+    //
+    //     map.addLayer(lis_layer);
+    //
+    // };
+
     /************************************************************************
      *                        DEFINE PUBLIC INTERFACE
      *************************************************************************/
@@ -628,6 +666,8 @@ var GRACE_MAP = (function() {
         }).change();
 
         $("#slider").on("slidechange", function(event, ui) {
+            var x = tracker[ui.value];
+            chart.series[1].setData([[x,-50],[x,50]]);
             var date_text = $("#select_layer option")[ui.value].text;
             $( "#grace-date" ).val(date_text); //Get the value from the slider
             var date_value = $("#select_layer option")[ui.value].value;

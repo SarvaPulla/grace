@@ -78,6 +78,10 @@ class Grace(TethysAppBase):
                     UrlMap(name='plot-region',
                            url='grace/plot-region',
                            controller='grace.ajax_controllers.plot_region'),
+                    UrlMap(name='api_get_point_values',
+                           url='grace/api/GetPointValues',
+                           controller='grace.api.api_get_point_values'),
+
 
         )
 

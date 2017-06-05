@@ -360,6 +360,8 @@ def get_global_plot(pt_coords):
 
     nc_file = '/grace/global/GRCTellus.JPL.200204_201608.GLO.RL05M_1.MSCNv02CRIv02.nc'
 
+    # nc_file = '/home/tethys/netcdf/global/GRCTellus.JPL.200204_201608.GLO.RL05M_1.MSCNv02CRIv02.nc'
+
     coords = pt_coords.split(',')
     stn_lat = float(coords[1])
     stn_lon = float(coords[0])
@@ -367,6 +369,7 @@ def get_global_plot(pt_coords):
     nc_fid = Dataset(nc_file, 'r')
     nc_var = nc_fid.variables  # Get the netCDF variables
     nc_var.keys()  # Getting variable keys
+    print nc_var.keys()
 
     time = nc_var['time'][:]
     start_date = '01/01/2002'
@@ -379,6 +382,8 @@ def get_global_plot(pt_coords):
 
         end_date = date_str + timedelta(days=float(v))  # Actual human readable date of the timestep
 
+        print end_date
+
         data = nc_var['lwe_thickness'][timestep, :, :]
 
         lon_idx = (np.abs(lon - stn_lon)).argmin()
@@ -390,6 +395,51 @@ def get_global_plot(pt_coords):
 
         ts_plot.append([time_stamp, round(float(value), 3)])
         ts_plot.sort()
+
+    graph_json["values"] = ts_plot
+    graph_json["point"] = [round(stn_lat, 2), round(stn_lon, 2)]
+    graph_json = json.dumps(graph_json)
+    return graph_json
+
+def get_global_plot_api(pt_coords,start_date,end_date):
+    graph_json = {}
+
+    ts_plot = []
+
+    nc_file = '/grace/global/GRCTellus.JPL.200204_201608.GLO.RL05M_1.MSCNv02CRIv02.nc'
+
+    # nc_file = '/home/tethys/netcdf/global/GRCTellus.JPL.200204_201608.GLO.RL05M_1.MSCNv02CRIv02.nc'
+    coords = pt_coords.split(',')
+    stn_lat = float(coords[1])
+    stn_lon = float(coords[0])
+
+    nc_fid = Dataset(nc_file, 'r')
+    nc_var = nc_fid.variables  # Get the netCDF variables
+    nc_var.keys()  # Getting variable keys
+
+    time = nc_var['time'][:]
+    start_date = '2002-01-01'
+    date_str = datetime.strptime(start_date, "%Y-%m-%d")  # Start Date string.
+    lat = nc_var['lat'][:]
+    lon = nc_var['lon'][:]
+
+    for timestep, v in enumerate(time):
+        current_time_step = nc_var['lwe_thickness'][timestep, :, :]  # Getting the index of the current timestep
+
+        actual_date = date_str + timedelta(days=float(v))  # Actual human readable date of the timestep
+
+
+        data = nc_var['lwe_thickness'][timestep, :, :]
+
+        lon_idx = (np.abs(lon - stn_lon)).argmin()
+        lat_idx = (np.abs(lat - stn_lat)).argmin()
+
+        value = data[lat_idx, lon_idx]
+
+        time_stamp = calendar.timegm(actual_date.utctimetuple()) * 1000
+        if start_date < unicode(actual_date) < end_date:
+            ts_plot.append([time_stamp, round(float(value), 3)])
+            ts_plot.sort()
 
     graph_json["values"] = ts_plot
     graph_json["point"] = [round(stn_lat, 2), round(stn_lon, 2)]
@@ -471,7 +521,7 @@ def get_pt_region(pt_coords,nc_file):
     graph_json["values"] = ts_plot
     graph_json["point"] = [round(stn_lat, 2), round(stn_lon, 2)]
     graph_json = json.dumps(graph_json)
-    print graph_json
+
 
     return graph_json
 

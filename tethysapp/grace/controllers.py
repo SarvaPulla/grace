@@ -18,11 +18,11 @@ def home(request):
     """
     Controller for the app home page.
     """
-    create_global_tiff("lwe_thickness")
     session = SessionMaker()
     # Query DB for regions
     regions = session.query(Region).all()
     region_list = []
+
     for region in regions:
         region_list.append(("%s" % (region.display_name),region.id))
 

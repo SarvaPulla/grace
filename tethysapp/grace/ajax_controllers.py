@@ -33,7 +33,6 @@ def plot_region(request):
         region_dir = os.path.join(FILE_DIR + region_store, '')
 
         nc_file = os.path.join(region_dir+region_store+".nc")
-        print nc_file
 
         if pt_coords:
             graph = get_pt_region(pt_coords,nc_file)
