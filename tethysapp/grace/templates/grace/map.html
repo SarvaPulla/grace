@@ -82,10 +82,11 @@
         <label id="cbar-label" for="opacity">Colorbar Max:</label>
         <input type="text" id="cbar-slider" readonly style="border:0; color:#f6931f; font-weight:normal;" value="50">
     </div>
+</div>
     <br><br>
     <div id="legend-bar"><div id="opacity-slider" class="col-md-4"></div><div class="col-md-2"></div><div id="max-slider" class="col-md-6"></div></div>
 <!--The div that stores important information about the layers,service folder, timestep and max depth. This will be retrieved in the JavaScript for further processing.-->
-<div id="region" name="region" data-map-center="{{map_center}}" data-wms-url="{{wms_url}}" data-layers-length="{{layers_length}}" data-range={{range}} data-bbox="{{bbox}}" data-tracker="{{x_tracker}}" data-range-min="-50" data-range-max="50" data-color-bar="{{color_bar}}" style="display:none;"></div>
+<div id="region" name="region" data-map-center="{{map_center}}" data-wms-url="{{wms_url}}" data-layers-length="{{layers_length}}" data-range="{{range}}" data-bbox="{{bbox}}" data-tracker="{{x_tracker}}" data-range-min="-50" data-range-max="50" data-color-bar="{{color_bar}}" style="display:none;"></div>
 <br>
     {% gizmo plot_view grace_plot %}
 <br>
