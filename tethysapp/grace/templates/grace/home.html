@@ -1,27 +1,101 @@
 {% extends "grace/base.html" %}
 {% load tethys_gizmos %}
+{% load staticfiles %}
+
+{% block app_content_wrapper_override %}
+<!-- Modal  -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#modalWelcome").modal("show");
+    });
+</script>
+ <!-- Welcome Modal -->
+    <div id="modalWelcome" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Guide</h4>
+                </div>
+                <div class="modal-body">
+                    <p><b>Subsetting of the regions is made possible through <a href="https://github.com/c-h-david/shbaam" target="_blank">SHBAAM</a> (Satellite Hydrology Bits Analysis And Mapping)</b></p>
+                    <p><b>For any questions, comments or subsetting requests contact Dr. Norm Jones at <a href="mailto:njones@byu.edu">njones@byu.edu</a></b></p>
+                    <h5>The following steps highlight the several functions of the GRACE web app</h5>
+                    <ol>
+                        <li class="welcome-step">Select a Region
+                            <p><b>Click the "Select a Region" dropdown and select an option</b></p>
+                            <p><b>Or simply select the Global Map tab from the navigation pane</b></p>
+                        </li>
+                        <li class="welcome-step">View different timesteps
+                            <p><b>You have two options to choose from:</b></p>
+                            <ul>
+                                <li class="welcome-substep1">Move the slider above the map
+                                <li class="welcome-substep1">Select a date from the dropdown on the left
+                            </ul>
+                        </li>
+                        <li class="welcome-step">View grid value
+                            <p><b>Please make sure that map interaction is set to none</b></p>
+                            <ul>
+                                <li class="welcome-substep1">Simply click on the map. It should show a popup with the value.
+                            </ul>
+                            <p>Note: If you don't see a value it means that you are cliking outside the actual data bounds.</p>
+                        </li>
+                        <li class="welcome-step">View Animation
+                            <ul>
+                                <li class="welcome-substep1">Use the animation controls to the left of the slider to start or stop animation
+                                <li class="welcome-substep1">Use the Forward and Reverse buttons to increase and decrease animation speed
+                            </ul>
+                        </li>
+                        <li class="welcome-step">View Time Series
+                            <p><b>Select the point option from the map interaction dropdown:</b></p>
+                            <ul>
+                                <li class="welcome-substep1">Click within the region and then click on Show Plot
+                                <li class="welcome-substep1">The Time Series for that point will be shown below the map
+                            </ul>
+                            <p>Note:For Global Map map check if the point you clicked has any data before clicking on show plot. Click on the map when the Map Interaction is set to none, if you don't see a popup it means that you are clicking outside the bounds.</p>
+                        </li>
+                        <li class="welcome-step">Click 'Exit' in the top-right of the app to return to the Main Apps Library</li>
+                    </ol>
+                </div>
+                <div class="modal-footer">
+                    <div id="byu-logo-container">
+                        <span><i>Developed at the BYU Hydroinformatics Lab</i></span>
+                    </div>&nbsp;
+                    <a href="https://github.com/SarvaPulla/grace" target="_blank" class="btn btn-default">View Code</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!--End modal content-->
+        </div>
+    </div>
+    <!--End modal-->
+{{block.super}}
+{% endblock %}
 
 {% block app_content %}
-    <h1>Welcome</h1>
+<h1>Welcome</h1>
 <p>This app produces basic maps and timeseries using data from the <a href="https://www.jpl.nasa.gov/missions/gravity-recovery-and-climate-experiment-grace/" target="_blank">GRACE mission</a></p>
 {% if regions_length > 0 %}
-    <form action="{% url 'grace:map' %}" method="get">
+<form action="{% url 'grace:map' %}" method="get">
     <p>Select a region from the dropdown below to view timeseries and an interactive map.</p>
-        {% gizmo select_input region_select %}
-        <div class="btn-group ">
-            <a name="submit-go-to-map" class="btn btn-success" role="button" onclick="document.forms[0].submit();" id="submit-go-to-map">
-                <span class="glyphicon glyphicon-play"></span>View Region
-            </a>
-        </div>
-    </form>
-    {% if user.is_superuser or user.is_staff %}
-    <p class="help-block">Don't see the region you want? Add one
-        <a href="{% url 'grace:add-region' %}">here</a>.</p>
-    {% endif %}
+    {% gizmo select_input region_select %}
+    <div class="btn-group ">
+        <a name="submit-go-to-map" class="btn btn-success" role="button" onclick="document.forms[0].submit();" id="submit-go-to-map">
+            <span class="glyphicon glyphicon-play"></span>View Region
+        </a>
+    </div>
+</form>
+{% if user.is_superuser or user.is_staff %}
+<p class="help-block">Don't see the region you want? Add one
+    <a href="{% url 'grace:add-region' %}">here</a>.</p>
+{% endif %}
 {% else %}
 <div class="alert alert-warning" role="alert">Sorry. There appear to be no regions.</div>
-    {% if user.is_superuser or user.is_staff %}
-    <p>To add one click <a href="{% url 'grace:add-region' %}">here.</a>
+{% if user.is_superuser or user.is_staff %}
+<p>To add one click <a href="{% url 'grace:add-region' %}">here.</a>
     {% endif %}
-{% endif %}
-{% endblock %}
+    {% endif %}
+
+
+    {% endblock %}

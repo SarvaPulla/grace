@@ -15,12 +15,12 @@
 {% block exit_button_override %}
 
 <div class="exit-button" style="display: flex; display: -webkit-flex;">
-  <a href="{% url 'grace:api' %}" target="_blank" style="margin-right: 5px;">API</a>
+  <!--<a href="{% url 'grace:api' %}" target="_blank" style="margin-right: 25px;">HELP</a>-->
+  <a href="{% url 'grace:api' %}" target="_blank" style="margin-right: 19px;">API</a>
   <a href="javascript:void(0);" onclick="TETHYS_APP_BASE.exit_app('{% url 'app_library' %}');">Exit</a>
 </div>
 
 {% endblock %}
-
 
 {% block app_navigation_items %}
 <li class="title">App Navigation</li>

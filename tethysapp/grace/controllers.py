@@ -46,6 +46,9 @@ def api(request):
     context = {'host': 'http://%s' % request.get_host()}
 
     return render(request, 'grace/api.html', context)
+
+
+
 @login_required
 def map(request):
 
