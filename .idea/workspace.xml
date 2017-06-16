@@ -220,7 +220,7 @@
     <option name="x" value="1665" />
     <option name="y" value="-4" />
     <option name="width" value="1535" />
-    <option name="height" value="800" />
+    <option name="height" value="840" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -420,7 +420,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1665" y="-4" width="1535" height="800" extended-state="6" />
+    <frame x="1665" y="-4" width="1535" height="840" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2495114" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />

@@ -3,8 +3,6 @@
 **This app is created to run in the Teyths Platform programming environment.
 See: https://github.com/tethysplatform/tethys and http://docs.tethysplatform.org/en/latest/**
 
-**You can find a working demo here at http://tethys.byu.edu/apps/grace/**
-
 ## Prerequisites:
 - Tethys Platform (CKAN, PostgresQL, GeoServer)
 - gdal (Python package for working with geospatial data)
@@ -32,7 +30,7 @@ $ exit
 Clone the app into the directory you want:
 ```
 $ git clone https://github.com/SarvaPulla/grace.git
-$ cd grace
+$ cd servirdi
 ```
 
 Then install the app into the Tethys Platform.
@@ -46,8 +44,8 @@ $ python setup.py develop
 ### Installation for Production:
 ```
 $ . /usr/lib/tethys/bin/activate
-$ cd grace
-$ python setup.py develop
+$ cd servirdi
+$ python setup.py install
 $ tethys manage collectstatic
 ```
 
